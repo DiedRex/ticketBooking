@@ -37,42 +37,42 @@
 </template>
 
 <script>
-    import VueCoreImageUpload  from 'vue-core-image-upload';
-    export default {
-        data: function(){
-            return {
-                src: './static/img/img.jpg',
-                fileList: []
-            }
-        },
-        components: {
-                VueCoreImageUpload
-        },
-        methods:{
-            imageuploaded(res) {
-                console.log(res)
-            },
-            handleError(){
-                this.$notify.error({
-                    title: '上传失败',
-                    message: '图片上传接口上传失败，可更改为自己的服务器接口'
-                });
-            }
-        }
+import VueCoreImageUpload from "vue-core-image-upload";
+export default {
+  data: function() {
+    return {
+      src: "./static/img/img.jpg",
+      fileList: []
+    };
+  },
+  components: {
+    VueCoreImageUpload
+  },
+  methods: {
+    imageuploaded(res) {
+      console.log(res);
+    },
+    handleError() {
+      this.$notify.error({
+        title: "上传失败",
+        message: "图片上传接口上传失败，可更改为自己的服务器接口"
+      });
     }
+  }
+};
 </script>
 
 <style scoped>
-    .content-title{
-        font-weight: 400;
-        line-height: 50px;
-        margin: 10px 0;
-        font-size: 22px;
-        color: #1f2f3d;
-    }
-    .pre-img{
-        width:250px;
-        height: 250px;
-        margin-bottom: 20px;
-    }
+.content-title {
+  font-weight: 400;
+  line-height: 50px;
+  margin: 10px 0;
+  font-size: 22px;
+  color: #1f2f3d;
+}
+.pre-img {
+  width: 250px;
+  height: 250px;
+  margin-bottom: 20px;
+}
 </style>

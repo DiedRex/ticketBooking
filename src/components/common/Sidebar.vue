@@ -32,50 +32,47 @@ export default {
         {
           icon: "el-icon-menu",
           index: "2",
-          title: "表格",
+          title: "用户管理",
           subs: [
             {
               index: "basetable",
-              title: "基础表格"
+              title: "人员管理"
             },
             {
               index: "vuetable",
-              title: "Vue表格组件"
+              title: "客户管理"
+            },
+            {
+              index: "vuetable",
+              title: "角色管理"
             }
           ]
         },
         {
           icon: "el-icon-date",
           index: "3",
-          title: "表单",
+          title: "航班管理",
           subs: [
             {
               index: "baseform",
-              title: "基本表单"
+              title: "航班信息"
             },
             {
               index: "vueeditor",
-              title: "编辑器"
-            },
-            {
-              index: "markdown",
-              title: "markdown"
-            },
-            {
-              index: "upload",
-              title: "文件上传"
+              title: "航班票价"
             }
           ]
         },
         {
-          icon: "el-icon-star-on",
-          index: "basecharts",
-          title: "图表"
-        },
-        {
-          icon: "el-icon-upload2",
-          index: "drag",
-          title: "拖拽"
+          icon: "el-icon-date",
+          index: "4",
+          title: "订单管理",
+          subs: [
+            {
+              index: "baseform",
+              title: "订单管理"
+            }
+          ]
         }
       ]
     };

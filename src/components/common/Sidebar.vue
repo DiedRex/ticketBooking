@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar">
-    <el-menu :default-active="onRoutes" class="el-menu-vertical-demo" theme="dark" unique-opened router>
+    <el-menu :default-active="onRoutes" class="el-menu-vertical-demo" unique-opened router background-color="#324157" text-color="#fff" active-text-color="#20a0ff">
       <template v-for="item in items">
         <template v-if="item.subs">
           <el-submenu :key="item.index" :index="item.index">
@@ -25,9 +25,9 @@ export default {
     return {
       items: [
         {
-          icon: "el-icon-setting",
-          index: "readme",
-          title: "自述"
+          icon: "el-icon-star-on",
+          index: "index",
+          title: "介绍"
         },
         {
           icon: "el-icon-menu",
@@ -64,13 +64,13 @@ export default {
           ]
         },
         {
-          icon: "el-icon-date",
+          icon: "el-icon-tickets",
           index: "4",
           title: "订单管理",
           subs: [
             {
               index: "order",
-              title: "订单管理"
+              title: "订单"
             }
           ]
         }

@@ -111,3 +111,7 @@ a{text-decoration: none}
 .editor-btn{
     margin-top: 20px;
 }
+.el-submenu__icon-arrow::before {
+  font-weight: bold;
+  font-size: 1rem;
+}

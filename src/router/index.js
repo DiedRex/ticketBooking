@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+const index = () => import('@/components/index')
 
 Vue.use(Router)
 
@@ -9,11 +10,12 @@ export default new Router({
     redirect: '/login'
   },
   {
-    path: '/readme',
+    path: '/index',
     component: () => import('@/components/common/Home'),
     children: [{
       path: '/',
-      redirect: '/client'
+      component: index
+      // redirect: '/client'
     },
     {
       path: '/client',

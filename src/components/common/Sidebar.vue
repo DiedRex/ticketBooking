@@ -26,7 +26,7 @@ export default {
       items: [
         {
           icon: "el-icon-setting",
-          index: "readme",
+          index: "index",
           title: "自述"
         },
         {

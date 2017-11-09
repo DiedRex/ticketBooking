@@ -25,9 +25,9 @@ export default {
     return {
       items: [
         {
-          icon: "el-icon-setting",
+          icon: "el-icon-star-on",
           index: "index",
-          title: "自述"
+          title: "介绍"
         },
         {
           icon: "el-icon-menu",
@@ -64,7 +64,7 @@ export default {
           ]
         },
         {
-          icon: "el-icon-document",
+          icon: "el-icon-tickets",
           index: "4",
           title: "订单管理",
           subs: [

@@ -3,7 +3,7 @@
         <router-view></router-view>
     </div>
 </template>
-<style>
+<style lang="stylus">
   @import "../static/css/main.css";
   @import "../static/css/color-dark.css";
 </style>

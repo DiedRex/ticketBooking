@@ -8,6 +8,7 @@
           {{username}}
         </span>
         <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="loginout">修改密码</el-dropdown-item>
           <el-dropdown-item command="loginout">退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -37,7 +38,7 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="stylus" scoped>
 .header {
   position: relative;
   box-sizing: border-box;
@@ -73,6 +74,9 @@ export default {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+}
+.el-dropdown-menu {
+  padding: 0
 }
 .el-dropdown-menu__item {
   text-align: center;

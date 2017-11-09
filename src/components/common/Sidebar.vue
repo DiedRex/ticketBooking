@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar">
-    <el-menu :default-active="onRoutes" class="el-menu-vertical-demo" theme="dark" unique-opened router>
+    <el-menu :default-active="onRoutes" class="el-menu-vertical-demo" unique-opened router>
       <template v-for="item in items">
         <template v-if="item.subs">
           <el-submenu :key="item.index" :index="item.index">
@@ -64,13 +64,13 @@ export default {
           ]
         },
         {
-          icon: "el-icon-date",
+          icon: "el-icon-document",
           index: "4",
           title: "订单管理",
           subs: [
             {
               index: "order",
-              title: "订单管理"
+              title: "订单"
             }
           ]
         }

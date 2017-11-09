@@ -10,47 +10,42 @@ export default new Router({
   },
   {
     path: '/readme',
-    component: resolve => require(['../components/common/Home.vue'], resolve),
+    component: () => import('@/components/common/Home'),
     children: [{
       path: '/',
-      component: resolve => require(['../components/page/Readme.vue'], resolve)
+      redirect: '/client'
     },
     {
-      path: '/basetable',
-      component: resolve => require(['../components/page/BaseTable.vue'], resolve)
+      path: '/client',
+      component: () => import('@/components/userManager/client')
     },
     {
-      path: '/vuetable',
-      component: resolve => require(['../components/page/VueTable.vue'], resolve) // vue-datasource组件
+      path: '/person',
+      component: () => import('@/components/userManager/person')
     },
     {
-      path: '/baseform',
-      component: resolve => require(['../components/page/BaseForm.vue'], resolve)
+      path: '/character',
+      component: () => import('@/components/userManager/character')
     },
     {
-      path: '/vueeditor',
-      component: resolve => require(['../components/page/VueEditor.vue'], resolve) // Vue-Quill-Editor组件
+      path: '/order',
+      component: () => import('@/components/orderManager/order')
     },
     {
-      path: '/markdown',
-      component: resolve => require(['../components/page/Markdown.vue'], resolve) // Vue-Quill-Editor组件
+      path: '/fare',
+      component: () => import('@/components/flightManager/fare')
     },
     {
-      path: '/upload',
-      component: resolve => require(['../components/page/Upload.vue'], resolve) // Vue-Core-Image-Upload组件
-    },
-    {
-      path: '/basecharts',
-      component: resolve => require(['../components/page/BaseCharts.vue'], resolve) // vue-schart组件
-    },
-    {
-      path: '/drag',
-      component: resolve => require(['../components/page/DragList.vue'], resolve) // 拖拽列表组件
-    }
-    ]
+      path: '/message',
+      component: () => import('@/components/flightManager/message')
+    }]
   },
   {
     path: '/login',
-    component: resolve => require(['../components/page/Login.vue'], resolve)
+    component: () => import('@/components/other/login')
+  },
+  {
+    path: '/register',
+    component: () => import('@/components/other/register')
   }]
 })

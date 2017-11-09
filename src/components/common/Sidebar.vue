@@ -35,15 +35,15 @@ export default {
           title: "用户管理",
           subs: [
             {
-              index: "basetable",
+              index: "person",
               title: "人员管理"
             },
             {
-              index: "vuetable",
+              index: "client",
               title: "客户管理"
             },
             {
-              index: "vuetable",
+              index: "character",
               title: "角色管理"
             }
           ]
@@ -54,11 +54,11 @@ export default {
           title: "航班管理",
           subs: [
             {
-              index: "baseform",
+              index: "message",
               title: "航班信息"
             },
             {
-              index: "vueeditor",
+              index: "fare",
               title: "航班票价"
             }
           ]
@@ -69,7 +69,7 @@ export default {
           title: "订单管理",
           subs: [
             {
-              index: "baseform",
+              index: "order",
               title: "订单管理"
             }
           ]

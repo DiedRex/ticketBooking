@@ -10,7 +10,7 @@ function resolve (dir) {
 
 module.exports = {
   entry: {
-    app: ['babel-polyfill','./src/main.js']
+    app: ['babel-polyfill', './src/main.js']
   },
   output: {
     path: config.build.assetsRoot,
@@ -26,8 +26,8 @@ module.exports = {
       resolve('node_modules')
     ],
     alias: {
+      '@': resolve('src'),
       'vue$': 'vue/dist/vue.common.js',
-      'src': resolve('src'),
       'assets': resolve('src/assets'),
       'components': resolve('src/components')
     }
@@ -60,7 +60,7 @@ module.exports = {
         }
       }
     ]
-  },
+  }
     // plugins: [
     //     new webpack.DllReferencePlugin({
     //       context: path.resolve(__dirname, '..'),

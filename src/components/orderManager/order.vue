@@ -262,6 +262,9 @@ export default {
     margin-top: 1.25rem
   }
 }
+.el-table {
+  border-radius: .25rem
+}
 .el-dialog {
   .el-input {
     width: 95%

@@ -25,10 +25,6 @@ export default {
   .el-header {
     padding: 0
   }
-  .el-table {
-    border: 1px solid #d8dce5
-    border-radius: 4px
-  }
   .el-header {
     margin-bottom: 1rem
   }

@@ -9,29 +9,30 @@
 
     <el-header style="height:100%">
       <el-row>
-        <el-col :span="6">
+        <el-col class="timeRange">
           <el-date-picker v-model="timeRange" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
           </el-date-picker>
         </el-col>
 
-        <el-col :span="8">
+        <el-col class="position">
           <el-select v-model="startPosition" placeholder="起飞地点">
             <el-option v-for="(position, index) in positions" :key="index" :label="position.label" :value="position.value">
             </el-option>
           </el-select>
-          <span>~</span>
+          <span style="color:rgba(0, 0, 0, 0.26);">~</span>
           <el-select v-model="endPosition" placeholder="结束地点">
             <el-option v-for="(position, index) in positions" :key="index" :label="position.label" :value="position.value">
             </el-option>
           </el-select>
         </el-col>
-        <el-col :span="1">
-          <el-button type="primary" @click="reset">重置</el-button>
+        <el-col class="btn">
+          <el-button type="primary" @click="reset">重置<i class="el-icon-refresh el-icon--right"></i></el-button>
+          <el-button type="primary" @click="addVisible = true">录入<i class="el-icon-circle-plus-outline el-icon--right"></i></el-button>
         </el-col>
       </el-row>
     </el-header>
 
-    <el-table :data="getTableData" style="width: 100%">
+    <el-table border :data="getTableData" style="width: 100%">
       <el-table-column type="index" width="50">
       </el-table-column>
       <el-table-column label="订单编号">
@@ -79,7 +80,7 @@
           白云
         </template>
       </el-table-column>
-      <el-table-column label="日期">
+      <el-table-column label="日期" width="100">
         <template slot-scope="scope">
           2017-11-06
         </template>
@@ -100,10 +101,58 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <el-dialog title="录入航班" :visible.sync="addVisible" width="30%" center>
+      <el-form ref="form" :model="form" label-width="80px">
+        <el-form-item label="航班公司">
+          <el-input v-model="form.name"></el-input>
+        </el-form-item>
+        <el-form-item label="航班号">
+          <el-input v-model="form.name"></el-input>
+        </el-form-item>
+
+        <el-form-item label="起飞城市">
+          <el-select v-model="form.region" placeholder="请选择活动区域">
+            <el-option label="区域一" value="shanghai"></el-option>
+            <el-option label="区域二" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="到达城市">
+          <el-select v-model="form.region" placeholder="请选择活动区域">
+            <el-option label="区域一" value="shanghai"></el-option>
+            <el-option label="区域二" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="航班时间">
+          <el-col :span="11">
+            <el-date-picker type="fixed-time" placeholder="开始时间" v-model="form.date1" style="width: 100%;"></el-date-picker>
+          </el-col>
+          <el-col class="line" style="text-align:center" :span="1">-</el-col>
+          <el-col :span="11">
+            <el-date-picker type="fixed-time" placeholder="结束时间" v-model="form.date1" style="width: 100%;"></el-date-picker>
+          </el-col>
+        </el-form-item>
+
+        <el-form-item label="时长">
+          <el-input disabled v-model="form.name"></el-input>
+        </el-form-item>
+        <el-form-item class="time" label="日期">
+          <el-col :span="11">
+            <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+          </el-col>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="addVisible = false">确 定</el-button>
+        <el-button @click="addVisible = false">取 消</el-button>
+      </span>
+    </el-dialog>
 	</div>
 </template>
 
 <script>
+import { HTTP } from "@/api/index"
 export default {
 	name: 'order',
 	data() {
@@ -125,6 +174,7 @@ export default {
         name: '王小虎',
         address: '上海市普陀区金沙江路 1516 弄'
       }],
+      addVisible: false,
       timeRange: null,
       startPosition: null,
       endPosition: null,
@@ -144,6 +194,16 @@ export default {
         value: '选项5',
         label: '北京烤鸭'
       }],
+      form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
       startPickerOptions: {
         disabledDate(time) {
           if (this.startTime !== null) {
@@ -170,15 +230,51 @@ export default {
   },
   methods: {
     reset () {
-      console.log(123)
       this.timeRange = null
       this.startPosition = null
       this.endPosition = null
+    },
+    add () {
+
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
+.crumbs {
+  margin-bottom: 0
+}
+.el-row {
+  .timeRange {
+    width: 21.875rem
+    margin-right: 1.25rem
+    margin-top: 1.25rem
+  }
+  .position {
+    width: 28.4375rem
+    margin-right: 1.25rem
+    margin-top: 1.25rem
+  }
+  .btn {
+    width: 12.5rem
+    margin-right: 1.25rem
+    margin-top: 1.25rem
+  }
+}
+.el-table {
+  border-radius: .25rem
+}
+.el-dialog {
+  .el-input {
+    width: 95%
+  }
+  div.el-select {
+    width: 95.5%
+  }
+  .time div .el-col {
+    width: 95.5%
+  }
+}
 
 </style>

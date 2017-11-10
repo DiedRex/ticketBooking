@@ -7,36 +7,30 @@
 			</el-breadcrumb>
 		</div>
 		<div class="handle-box">
-			<el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button>
-			<!-- <el-select v-model="select_cate" placeholder="筛选省份" class="handle-select mr10">
-					<el-option key="1" label="广东省" value="广东省"></el-option>
-					<el-option key="2" label="湖南省" value="湖南省"></el-option>
-			</el-select> -->
-			<el-button type="primary" icon="plus" class="handle-del mr10">新增用户</el-button>
+      <!-- <el-button type="primary" icon="el-icon-delete" class="handle-del mr10" @click="delAll">批量删除</el-button>
+			<el-button type="primary" icon="el-icon-plus" class="handle-del mr10">新增用户</el-button> -->
 			<el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
 			<el-button type="primary" icon="search" @click="search">搜索</el-button>
 		</div>
-		<el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
+		<el-table :data="tableData" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
 				<el-table-column type="selection" width="55"></el-table-column>
 				<el-table-column prop="num" label=""  width="80">
 				</el-table-column>
-				<el-table-column prop="name" label="姓名" width="180">
+				<el-table-column prop="name" label="姓名" width="160">
 				</el-table-column>
-				<el-table-column prop="user" label="用户名" width="180">
+				<el-table-column prop="client_number" label="客户编号" width="160">
 				</el-table-column>
-				<el-table-column prop="phone" label="电话" width="180">
+				<el-table-column prop="license_number" label="证件号" width="160">
 				</el-table-column>
-				<el-table-column prop="role" label="角色" width="180">
+				<el-table-column prop="phone" label="电话" width="160">
 				</el-table-column>
-				<!-- <el-table-column prop="address" label="地址" :formatter="formatter">
-				</el-table-column> -->
+				<el-table-column prop="frequency" label="已购票次数" width="160">
+				</el-table-column>
 				<el-table-column label="操作" width="300">
           <template slot-scope="scope">
-            <el-button size="small"
-              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-            <el-button size="small" type="danger"
-              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-            <el-button size="small" type="warning">密码重置</el-button>
+            <el-button size="small">拉黑</el-button>
+            <el-button size="small" type="danger">取消拉黑</el-button>
+            <el-button size="small" type="warning">订单查看</el-button>
           </template>
 				</el-table-column>
 		</el-table>
@@ -66,25 +60,7 @@ export default {
   },
   computed: {
     data() {
-      const self = this;
-      return self.tableData.filter(function(d) {
-        let is_del = false;
-        for (let i = 0; i < self.del_list.length; i++) {
-          if (d.name === self.del_list[i].name) {
-            is_del = true;
-            break;
-          }
-        }
-        if (!is_del) {
-          if (
-            d.address.indexOf(self.select_cate) > -1 &&
-            (d.name.indexOf(self.select_word) > -1 ||
-              d.address.indexOf(self.select_word) > -1)
-          ) {
-            return d;
-          }
-        }
-      });
+
     }
   },
   methods: {
@@ -94,11 +70,19 @@ export default {
     },
     getData() {
       let self = this;
-      if (process.env.NODE_ENV === "development") {
-        self.url = "/ms/table/list";
-      }
-      self.$axios.post(self.url, { page: self.cur_page }).then(res => {
+      console.log(self);
+      // if (process.env.NODE_ENV === "development") {
+      //   self.url = "/ms/table/list";
+      // }
+      // self.$axios.post(self.url, { page: self.cur_page }).then(res => {
+      //   self.tableData = res.data.list;
+      // });
+      self.$axios.get(self.url).then(res =>{
         self.tableData = res.data.list;
+        for(let i = 0;i<self.tableData.length;i++){
+          self.tableData[i].num = i+1;
+        }
+        console.log(self.tableData);
       });
     },
     search() {

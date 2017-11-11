@@ -7,14 +7,14 @@
       </el-breadcrumb>
     </div>
 
-    <el-header style="height:100%">
-      <el-row>
-        <el-col class="timeRange">
+    <el-container>
+      <el-header style="height:100%">
+        <div class="timeRange">
           <el-date-picker v-model="timeRange" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
           </el-date-picker>
-        </el-col>
+        </div>
 
-        <el-col class="position">
+        <div class="position">
           <el-select v-model="startPosition" placeholder="起飞地点">
             <el-option v-for="(position, index) in positions" :key="index" :label="position.label" :value="position.value">
             </el-option>
@@ -24,72 +24,74 @@
             <el-option v-for="(position, index) in positions" :key="index" :label="position.label" :value="position.value">
             </el-option>
           </el-select>
-        </el-col>
-        <el-col class="btn">
+        </div>
+        <div class="btn">
           <el-button type="primary" @click="reset">重置<i class="el-icon-refresh el-icon--right"></i></el-button>
-        </el-col>
-      </el-row>
-    </el-header>
+        </div>
+      </el-header>
 
-    <el-table border :data="getTableData" style="width: 100%">
-      <el-table-column type="index" width="50">
-      </el-table-column>
-      <el-table-column label="航空公司">
-        <template slot-scope="scope">
-          110501
-        </template>
-      </el-table-column>
-      <el-table-column label="航班号">
-        <template slot-scope="scope">
-          002
-        </template>
-      </el-table-column>
-      <el-table-column label="机型">
-        <template slot-scope="scope">
-          中航
-        </template>
-      </el-table-column>
-      <el-table-column label="起飞城市">
-        <template slot-scope="scope">
-          zh01
-        </template>
-      </el-table-column>
-      <el-table-column label="到达城市">
-        <template slot-scope="scope">
-          波音
-        </template>
-      </el-table-column>
-      <el-table-column label="起飞时间">
-        <template slot-scope="scope">
-          广州
-        </template>
-      </el-table-column>
-      <el-table-column label="到达时间">
-        <template slot-scope="scope">
-          上海
-        </template>
-      </el-table-column>
-      <el-table-column label="时长">
-        <template slot-scope="scope">
-          虹桥
-        </template>
-      </el-table-column>
-      <el-table-column label="日期">
-        <template slot-scope="scope">
-          白云
-        </template>
-      </el-table-column>
-      <el-table-column label="经济舱" width="100">
-        <template slot-scope="scope">
-          2017-11-06
-        </template>
-      </el-table-column>
-      <el-table-column label="公务舱">
-        <template slot-scope="scope">
-          552
-        </template>
-      </el-table-column>
-    </el-table>
+      <el-main>
+        <el-table border :data="getTableData" style="width: 100%">
+          <el-table-column type="index" width="50">
+          </el-table-column>
+          <el-table-column label="航空公司">
+            <template slot-scope="scope">
+              110501
+            </template>
+          </el-table-column>
+          <el-table-column label="航班号">
+            <template slot-scope="scope">
+              002
+            </template>
+          </el-table-column>
+          <el-table-column label="机型">
+            <template slot-scope="scope">
+              中航
+            </template>
+          </el-table-column>
+          <el-table-column label="起飞城市">
+            <template slot-scope="scope">
+              zh01
+            </template>
+          </el-table-column>
+          <el-table-column label="到达城市">
+            <template slot-scope="scope">
+              波音
+            </template>
+          </el-table-column>
+          <el-table-column label="起飞时间">
+            <template slot-scope="scope">
+              广州
+            </template>
+          </el-table-column>
+          <el-table-column label="到达时间">
+            <template slot-scope="scope">
+              上海
+            </template>
+          </el-table-column>
+          <el-table-column label="时长">
+            <template slot-scope="scope">
+              虹桥
+            </template>
+          </el-table-column>
+          <el-table-column label="日期">
+            <template slot-scope="scope">
+              白云
+            </template>
+          </el-table-column>
+          <el-table-column label="经济舱" width="100">
+            <template slot-scope="scope">
+              2017-11-06
+            </template>
+          </el-table-column>
+          <el-table-column label="公务舱">
+            <template slot-scope="scope">
+              552
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-main>
+    </el-container>
 	</div>
 </template>
 

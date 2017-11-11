@@ -24,12 +24,45 @@ export default {
   background: #f3f5f6
   .el-header {
     padding: 0
-  }
-  .el-header {
     margin-bottom: 1rem
   }
-  .el-col {
-    // text-align: center
+  .order, .message, .fare {
+    .crumbs {
+      margin-bottom: 0
+    }
+    .el-header {
+      .timeRange, .position, .btn {
+        display: inline-block
+        margin-right: 1.25rem
+        margin-top: 1.25rem
+      }
+      .timeRange {
+        width: 21.875rem
+      }
+      .position {
+        width: 28.4375rem
+      }
+      .btn {
+        width: 12.5rem
+      }
+    }
+    .el-main {
+      padding: 0
+      .el-table {
+        border-radius: .25rem
+      }
+    }
+    .el-dialog {
+      .el-input {
+        width: 95%
+      }
+      div.el-select {
+        width: 95.5%
+      }
+      .time div .el-col {
+        width: 95.5%
+      }
+    }
   }
 }
 </style>

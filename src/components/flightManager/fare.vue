@@ -7,100 +7,105 @@
       </el-breadcrumb>
     </div>
 
-    <el-header style="height:100%">
-      <el-row>
-        <el-col class="timeRange">
-          <el-date-picker v-model="timeRange" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
-          </el-date-picker>
-        </el-col>
+    <el-container>
+      <el-aside width="250px">
+        <div class="asider-title">
+          <p>123dsadasdasdsad</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+          <p>123</p>
+        </div>
+      </el-aside>
 
-        <el-col class="position">
-          <el-select v-model="startPosition" placeholder="起飞地点">
-            <el-option v-for="(position, index) in positions" :key="index" :label="position.label" :value="position.value">
-            </el-option>
-          </el-select>
-          <span style="color:rgba(0, 0, 0, 0.26);">~</span>
-          <el-select v-model="endPosition" placeholder="结束地点">
-            <el-option v-for="(position, index) in positions" :key="index" :label="position.label" :value="position.value">
-            </el-option>
-          </el-select>
-        </el-col>
-        <el-col class="btn">
-          <el-button type="primary" @click="reset">重置<i class="el-icon-refresh el-icon--right"></i></el-button>
-          <el-button type="primary" @click="addVisible = true">录入<i class="el-icon-circle-plus-outline el-icon--right"></i></el-button>
-        </el-col>
-      </el-row>
-    </el-header>
+      <el-main>
+        <el-form ref="form" :label-position="'left'" :model="form" label-width="100px">
+          <div class="left-form">
+            <el-form-item label="航班公司">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item label="机型">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item label="到达城市">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item label="到达时间">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </div>
+          <div class="right-form">
+            <el-form-item label="航班号">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item label="起飞城市">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item label="起飞时间">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item label="日期">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </div>
 
-    <el-table border :data="getTableData" style="width: 100%">
-      <el-table-column type="index" width="50">
-      </el-table-column>
-      <el-table-column label="订单编号">
-        <template slot-scope="scope">
-          110501
-        </template>
-      </el-table-column>
-      <el-table-column label="客户编号">
-        <template slot-scope="scope">
-          002
-        </template>
-      </el-table-column>
-      <el-table-column label="航空公司">
-        <template slot-scope="scope">
-          中航
-        </template>
-      </el-table-column>
-      <el-table-column label="航班号">
-        <template slot-scope="scope">
-          zh01
-        </template>
-      </el-table-column>
-      <el-table-column label="机型">
-        <template slot-scope="scope">
-          波音
-        </template>
-      </el-table-column>
-      <el-table-column label="出发城市">
-        <template slot-scope="scope">
-          广州
-        </template>
-      </el-table-column>
-      <el-table-column label="到达城市">
-        <template slot-scope="scope">
-          上海
-        </template>
-      </el-table-column>
-      <el-table-column label="起飞机场">
-        <template slot-scope="scope">
-          虹桥
-        </template>
-      </el-table-column>
-      <el-table-column label="到达机场">
-        <template slot-scope="scope">
-          白云
-        </template>
-      </el-table-column>
-      <el-table-column label="日期" width="100">
-        <template slot-scope="scope">
-          2017-11-06
-        </template>
-      </el-table-column>
-      <el-table-column label="单程票价">
-        <template slot-scope="scope">
-          552
-        </template>
-      </el-table-column>
-      <el-table-column label="座次">
-        <template slot-scope="scope">
-          08排5D
-        </template>
-      </el-table-column>
-      <el-table-column label="订单状态">
-        <template slot-scope="scope">
-          已出票
-        </template>
-      </el-table-column>
-    </el-table>
+        </el-form>
+
+        <el-table border :data="getTableData" style="width: 100%">
+          <el-table-column type="index" width="50">
+          </el-table-column>
+          <el-table-column label="类型">
+            <template slot-scope="scope">
+              110501
+            </template>
+          </el-table-column>
+          <el-table-column label="星期一">
+            <template slot-scope="scope">
+              002
+            </template>
+          </el-table-column>
+          <el-table-column label="星期二">
+            <template slot-scope="scope">
+              中航
+            </template>
+          </el-table-column>
+          <el-table-column label="星期三">
+            <template slot-scope="scope">
+              zh01
+            </template>
+          </el-table-column>
+          <el-table-column label="星期四">
+            <template slot-scope="scope">
+              波音
+            </template>
+          </el-table-column>
+          <el-table-column label="星期五">
+            <template slot-scope="scope">
+              广州
+            </template>
+          </el-table-column>
+          <el-table-column label="星期六">
+            <template slot-scope="scope">
+              上海
+            </template>
+          </el-table-column>
+          <el-table-column label="星期日">
+            <template slot-scope="scope">
+              虹桥
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-main>
+    </el-container>
 
     <el-dialog title="录入航班" :visible.sync="addVisible" width="30%" center>
       <el-form ref="form" :model="form" label-width="80px">
@@ -220,43 +225,59 @@ export default {
         }
       },
 		}
-	}
+	},
+  computed: {
+    getTableData () {
+
+      return this.tableData
+    }
+  },
+  methods: {
+    reset () {
+      this.timeRange = null
+      this.startPosition = null
+      this.endPosition = null
+    }
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
-.crumbs {
-  margin-bottom: 0
-}
-.el-row {
-  .timeRange {
-    width: 21.875rem
-    margin-right: 1.25rem
-    margin-top: 1.25rem
+.fare {
+  .el-container {
+    margin-top: 3rem
   }
-  .position {
-    width: 28.4375rem
-    margin-right: 1.25rem
-    margin-top: 1.25rem
+  .el-main {
+    .el-form {
+      text-align: center
+      .left-form, .right-form {
+        display: inline-block
+        width: 35%
+      }
+      .left-form {
+        margin-right: 15rem
+      }
+    }
   }
-  .btn {
-    width: 12.5rem
-    margin-right: 1.25rem
-    margin-top: 1.25rem
+  .el-aside {
+    margin-right: 3rem
+    .asider-title {
+      font-size: 2rem
+      background: white
+      color: #878d99
+      border: .0625rem solid #e6ebf5
+      p {
+        height: 4rem
+        padding: 1rem
+        border-top: .0625rem solid #e6ebf5
+        overflow: hidden
+        word-break: break-all
+        &:first-child {
+          border-top: 0
+        }
+      }
+    }
   }
-}
-.el-table {
-  border-radius: .25rem
-}
-.el-dialog {
-  .el-input {
-    width: 95%
-  }
-  div.el-select {
-    width: 95.5%
-  }
-  .time div .el-col {
-    width: 95.5%
-  }
+
 }
 </style>

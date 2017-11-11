@@ -53,14 +53,14 @@ export default {
       }
     }
     .el-dialog {
-      .el-input {
-        width: 95%
+      .el-dialog__body {
+        padding: 25px 35px 30px 27px
       }
-      div.el-select {
-        width: 95.5%
+      .el-select, .el-date-editor {
+        width: 100%
       }
-      .time div .el-col {
-        width: 95.5%
+      .el-form-item__content {
+        display: flex
       }
     }
   }

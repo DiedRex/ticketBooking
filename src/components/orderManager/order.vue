@@ -15,7 +15,7 @@
         </div>
 
         <div class="position">
-          <el-select v-model="startPosition" placeholder="起飞地点">
+          <el-select v-model="beginPosition" placeholder="起飞地点">
             <el-option v-for="(position, index) in positions" :key="index" :label="position.label" :value="position.value">
             </el-option>
           </el-select>
@@ -35,70 +35,31 @@
         <el-table border :data="getTableData" style="width: 100%">
           <el-table-column type="index" width="50">
           </el-table-column>
-          <el-table-column label="订单编号">
-            <template slot-scope="scope">
-              110501
-            </template>
+          <el-table-column prop="orderNumber" label="订单编号">
           </el-table-column>
-          <el-table-column label="客户编号">
-            <template slot-scope="scope">
-              002
-            </template>
+          <el-table-column prop="clientNumber" label="客户编号">
           </el-table-column>
-          <el-table-column label="航空公司">
-            <template slot-scope="scope">
-              中航
-            </template>
+          <el-table-column prop="business" label="航空公司">
           </el-table-column>
-          <el-table-column label="航班号">
-            <template slot-scope="scope">
-              zh01
-            </template>
+          <el-table-column prop="flightNumber" label="航班号">
           </el-table-column>
-          <el-table-column label="机型">
-            <template slot-scope="scope">
-              波音
-            </template>
+          <el-table-column prop="type" label="机型">
           </el-table-column>
-          <el-table-column label="出发城市">
-            <template slot-scope="scope">
-              广州
-            </template>
+          <el-table-column prop="beginCity" label="出发城市">
           </el-table-column>
-          <el-table-column label="到达城市">
-            <template slot-scope="scope">
-              上海
-            </template>
+          <el-table-column prop="endCity" label="到达城市">
           </el-table-column>
-          <el-table-column label="起飞机场">
-            <template slot-scope="scope">
-              虹桥
-            </template>
+          <el-table-column prop="beginFilght" label="起飞机场">
           </el-table-column>
-          <el-table-column label="到达机场">
-            <template slot-scope="scope">
-              白云
-            </template>
+          <el-table-column prop="endFilght" label="到达机场">
           </el-table-column>
-          <el-table-column label="日期" width="100">
-            <template slot-scope="scope">
-              2017-11-06
-            </template>
+          <el-table-column prop="date" label="日期" width="100">
           </el-table-column>
-          <el-table-column label="单程票价">
-            <template slot-scope="scope">
-              552
-            </template>
+          <el-table-column prop="onceMoney" label="单程票价">
           </el-table-column>
-          <el-table-column label="座次">
-            <template slot-scope="scope">
-              08排5D
-            </template>
+          <el-table-column prop="position" label="座次">
           </el-table-column>
-          <el-table-column label="订单状态">
-            <template slot-scope="scope">
-              已出票
-            </template>
+          <el-table-column prop="status" label="订单状态">
           </el-table-column>
         </el-table>
       </el-main>
@@ -107,42 +68,35 @@
     <el-dialog title="录入航班" :visible.sync="addVisible" width="30%" center>
       <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="航班公司">
-          <el-input v-model="form.name"></el-input>
+          <el-input v-model="form.business"></el-input>
         </el-form-item>
         <el-form-item label="航班号">
-          <el-input v-model="form.name"></el-input>
+          <el-input v-model="form.number"></el-input>
         </el-form-item>
 
         <el-form-item label="起飞城市">
-          <el-select v-model="form.region" placeholder="请选择活动区域">
+          <el-select v-model="form.beginPosition" placeholder="请选择活动区域">
             <el-option label="区域一" value="shanghai"></el-option>
             <el-option label="区域二" value="beijing"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="到达城市">
-          <el-select v-model="form.region" placeholder="请选择活动区域">
+          <el-select v-model="form.endPosition" placeholder="请选择活动区域">
             <el-option label="区域一" value="shanghai"></el-option>
             <el-option label="区域二" value="beijing"></el-option>
           </el-select>
         </el-form-item>
 
         <el-form-item label="航班时间">
-          <el-col :span="11">
-            <el-date-picker type="fixed-time" placeholder="开始时间" v-model="form.date1" style="width: 100%;"></el-date-picker>
-          </el-col>
-          <el-col class="line" style="text-align:center" :span="1">-</el-col>
-          <el-col :span="11">
-            <el-date-picker type="fixed-time" placeholder="结束时间" v-model="form.date1" style="width: 100%;"></el-date-picker>
-          </el-col>
+          <el-time-picker is-range v-model="form.time" range-separator="至" start-placeholder="开始时间" end-placeholder="结束时间" placeholder="选择时间范围">
+          </el-time-picker>
         </el-form-item>
 
         <el-form-item label="时长">
-          <el-input disabled v-model="form.name"></el-input>
+          <el-input disabled v-model="form.spentTime"></el-input>
         </el-form-item>
         <el-form-item class="time" label="日期">
-          <el-col :span="11">
-            <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
-          </el-col>
+          <el-date-picker type="date" placeholder="选择日期" v-model="form.date" style="width: 100%;"></el-date-picker>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -162,23 +116,30 @@ export default {
 			tableData: [{
         date: '2016-05-02',
         name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
+        address: '上海市普陀区金沙江路 1518 弄',
+        beginPosition: '上海'
+      },
+      {
+        date: '2016-05-02',
         name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
+        address: '上海市普陀区金沙江路 1518 弄',
+        beginPosition: '上海'
+      },
+      {
+        date: '2016-05-02',
         name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
+        address: '上海市普陀区金沙江路 1518 弄',
+        beginPosition: '上海'
+      },
+      {
+        date: '2016-05-02',
         name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
+        address: '上海市普陀区金沙江路 1518 弄',
+        beginPosition: '上海'
       }],
       addVisible: false,
       timeRange: null,
-      startPosition: null,
+      beginPosition: null,
       endPosition: null,
       positions: [{
         value: '上海',
@@ -197,15 +158,14 @@ export default {
         label: '北京烤鸭'
       }],
       form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
+        business: null,
+        number: null,
+        date: null,
+        beginPosition: null,
+        endPosition: null,
+        spentTime: null,
+        time: null
+      },
       startPickerOptions: {
         disabledDate(time) {
           if (this.startTime !== null) {
@@ -226,8 +186,38 @@ export default {
   },
   computed: {
     getTableData () {
+      let result = []
 
-      return this.tableData
+      if (this.timeRange !== null) {
+        result = this.filter(this.tableData, this.timeRange, function (item, timeRange) {
+          if((item.date >= timeRange[0]) && (item.date <= timeRange[1])) {
+            return true
+          }
+          return false
+        })
+      }
+
+      if (this.beginPosition !== null) {
+        result = this.filter(this.tableData, this.timeRange, function (item, beginPosition) {
+          if(item.beginPosition === beginPosition) {
+            return true
+          }
+          return false
+        })
+      }
+
+      if (this.endPosition !== null) {
+        result = this.filter(this.tableData, this.timeRange, function (item, endPosition) {
+          if(item.endPosition === endPosition) {
+            return true
+          }
+          return false
+        })
+      }
+
+      console.log(result)
+
+      return result
     }
   },
   methods: {
@@ -236,13 +226,14 @@ export default {
       this.startPosition = null
       this.endPosition = null
     },
-    add () {
-
+    filter (tableData, filter, fn) {
+      return tableData.filter(function (item, index, array) {
+        return fn(item, filter)
+      })
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-
 </style>

@@ -7,9 +7,9 @@
 			</el-breadcrumb>
 		</div>
 		<div class="handle-box">
-			<el-button type="primary" icon="el-icon-plus" class="handle-del mr10">新增用户</el-button>
+			<el-button type="primary" icon="el-icon-plus" class="handle-but">新增用户</el-button>
 			<el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
-			<el-button type="primary" icon="search" @click="search">搜索</el-button>
+			<el-button type="primary" icon="el-icon-search" @click="search" class="handle-but mr10">搜索</el-button>
 		</div>
 		<el-table :data="tableData" border style="width: 70%" ref="multipleTable" @selection-change="handleSelectionChange" scope="scope">
 				<el-table-column prop="num" label=""  width="80">
@@ -20,8 +20,8 @@
 				</el-table-column>
 				<el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button size="small" type="danger">删除</el-button>
-            <el-button size="small">用户</el-button>
+            <el-button size="small" type="danger" class="zone">删除</el-button>
+            <el-button size="small" class="zone">用户</el-button>
           </template>
 				</el-table-column>
 		</el-table>
@@ -119,5 +119,20 @@ export default {
 .handle-input {
   width: 300px;
   display: inline-block;
+  margin-top: .625rem;
+  margin-left: .3125rem;
+}
+
+.handle-but{
+  margin-top: .625rem;
+  margin-left: .3125rem;
+}
+
+.pagination{
+  text-align : center;
+}
+.zone{
+  margin-bottom:5px;
+  margin-left : 10px;
 }
 </style>

@@ -1,19 +1,21 @@
 <template>
 	<div class="table">
+    <!-- 面包屑导航 -->
 		<div class="crumbs">
 			<el-breadcrumb separator="/">
 				<el-breadcrumb-item><i class="el-icon-menu"></i> 用户管理</el-breadcrumb-item>
 				<el-breadcrumb-item>客户管理</el-breadcrumb-item>
 			</el-breadcrumb>
 		</div>
+
+    <!-- 搜索框 -->
 		<div class="handle-box">
-      <!-- <el-button type="primary" icon="el-icon-delete" class="handle-del mr10" @click="delAll">批量删除</el-button>
-			<el-button type="primary" icon="el-icon-plus" class="handle-del mr10">新增用户</el-button> -->
-			<el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
-			<el-button type="primary" icon="search" @click="search">搜索</el-button>
+			<el-input  v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
+			<el-button type="primary" icon="el-icon-search" @click="search" class="handle-but mr10">搜索</el-button>
 		</div>
-		<el-table :data="tableData" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
-				<el-table-column type="selection" width="55"></el-table-column>
+
+    <!-- 表单数据 -->
+		<el-table :data="tableData" border style="width: 100%" ref="multipleTable">
 				<el-table-column prop="num" label=""  width="80">
 				</el-table-column>
 				<el-table-column prop="name" label="姓名" width="160">
@@ -52,7 +54,7 @@ export default {
       select_cate: "",
       select_word: "",
       del_list: [],
-      is_search: false
+      is_search: false,
     };
   },
   created() {
@@ -128,5 +130,14 @@ export default {
 .handle-input {
   width: 300px;
   display: inline-block;
+}
+
+.handle-but{
+  margin-top: .625rem;
+  margin-left: .3125rem;
+}
+
+.pagination{
+  text-align : center;
 }
 </style>

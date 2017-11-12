@@ -7,10 +7,10 @@
 			</el-breadcrumb>
 		</div>
 		<div class="handle-box">
-      <el-button type="primary" icon="el-icon-delete" class="handle-del mr10" @click="delAll">批量删除</el-button>
-			<el-button type="primary" icon="el-icon-plus" class="handle-del mr10">新增用户</el-button>
+      <el-button type="primary" icon="el-icon-delete" class="handle-but" @click="delAll">批量删除</el-button>
+			<el-button type="primary" icon="el-icon-plus" class="handle-but"  @click="addVisible=true">新增用户</el-button>
 			<el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
-			<el-button type="primary" icon="search" @click="search">搜索</el-button>
+			<el-button type="primary" icon="el-icon-search" @click="search" class="handle-but">搜索</el-button>
 		</div>
 		<el-table :data="tableData" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange" scope="scope">
 				<el-table-column type="selection" width="55"></el-table-column>
@@ -36,6 +36,44 @@
       <el-pagination @current-change ="handleCurrentChange" layout="prev, pager, next" :total="1000">
       </el-pagination>
 		</div>
+
+
+    <!-- 新增用户信息录入 -->
+    <el-dialog title="录入人员" :visible.sync="addVisible" width="30%" center>
+      <el-form ref="form" :model="form" label-width="80px">
+        <el-form-item label="姓名" >
+          <el-input v-model="form.name" class="set-width"></el-input>
+        </el-form-item>
+        <el-form-item label="用户名">
+          <el-input v-model="form.username" class="set-width"></el-input>
+        </el-form-item>
+
+        <el-form-item label="电话">
+          <el-input v-model="form.phone" class="set-width"></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input v-model="form.password" class="set-width"></el-input>
+        </el-form-item>
+        <el-form-item label="确认密码">
+          <el-input v-model="form.passwordagain" class="set-width"></el-input>
+        </el-form-item>
+        <el-form-item label="角色">
+          <el-select v-model="form.role" placeholder="请分配用户角色" class="set-width">
+            <el-option label="管理员"></el-option>
+            <el-option label="机长"></el-option>
+            <el-option label="乘务员"></el-option>
+            <el-option label="安检人员"></el-option>
+            <el-option label="技术人员"></el-option>
+            <el-option label="后勤人员"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="addVisible = false">确 定</el-button>
+        <el-button @click="addVisible = false">取 消</el-button>
+      </span>
+    </el-dialog>
+
 	</div>
 </template>
 
@@ -44,13 +82,23 @@ export default {
   data() {
     return {
       url: "./static/vuetable.json",
-      tableData: [],
-      cur_page: 1,
+      tableData: [],//表单数据
+      addVisible: false,
+      cur_page: 1,//分页
       multipleSelection: [],
       select_cate: "",
       select_word: "",
       del_list: [],
-      is_search: false
+      is_search: false,
+      //dialog表单数据
+      form: {
+        name: null,
+        username: null,
+        phone: null,
+        role: null,
+        password: null,
+        passwordagain: null,
+      }
     };
   },
   created() {
@@ -83,8 +131,10 @@ export default {
         console.log(self.tableData);
       });
     },
-    search() {
-      this.is_search = true;
+    resetForm(){
+      this.form.name =null;
+      this.form.username = null;
+      console.log(this.form);
     },
     formatter(row, column) {
       return row.address;
@@ -126,5 +176,21 @@ export default {
 .handle-input {
   width: 300px;
   display: inline-block;
+  margin-top: .625rem;
+  margin-left: .3125rem;
 }
+
+.handle-but{
+  margin-top: .625rem;
+  margin-left: .3125rem;
+}
+
+.pagination{
+  text-align : center;
+}
+
+.set-width{
+  width:75%;
+}
+
 </style>

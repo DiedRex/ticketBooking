@@ -82,7 +82,48 @@ export default {
   data() {
     return {
       url: "./static/vuetable.json",
-      tableData: [],//表单数据
+      tableData: [{
+          num : 1,
+          user: "ll",
+          name: "林丽",
+          phone: "18819259282",
+          role : "机长"
+        },
+        {
+          num : 1,
+          user: "wm",
+          name: "文敏",
+          phone: "18819259282",
+          role : "机长"
+        },
+        {
+          num : 1,
+          user: "yxl",
+          name: "杨秀兰",
+          phone:"18819259282",
+          role : "机长"
+        },
+        {
+          num : 1,
+          user: "wq",
+          name: "魏强",
+          phone:"18819259282",
+          role : "机长"
+        },
+        {
+          num : 1,
+          user: "sxl",
+          name: "石秀兰",
+          phone:"18819259282",
+          role : "机长"
+        },
+        {
+          num : 1,
+          user: "zy",
+          name: "朱洋",
+          phone:"18819259282",
+          role : "机长"
+        }],//表单数据
       addVisible: false,
       cur_page: 1,//分页
       multipleSelection: [],
@@ -115,21 +156,16 @@ export default {
       this.getData();
     },
     getData() {
-      let self = this;
-      console.log(self);
-      // if (process.env.NODE_ENV === "development") {
-      //   self.url = "/ms/table/list";
-      // }
-      // self.$axios.post(self.url, { page: self.cur_page }).then(res => {
+      // // 用axios从json数据中获得数据数组
+      // let self = this;
+      // console.log(self);
+      // self.$axios.get(self.url).then(res =>{
       //   self.tableData = res.data.list;
+      //   for(let i = 0;i<self.tableData.length;i++){
+      //     self.tableData[i].num = i+1;
+      //   }
+      //   console.log(self.tableData);
       // });
-      self.$axios.get(self.url).then(res =>{
-        self.tableData = res.data.list;
-        for(let i = 0;i<self.tableData.length;i++){
-          self.tableData[i].num = i+1;
-        }
-        console.log(self.tableData);
-      });
     },
     resetForm(){
       this.form.name =null;

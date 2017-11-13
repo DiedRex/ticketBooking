@@ -115,27 +115,63 @@ export default {
 		return {
 			tableData: [{
         date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄',
-        beginPosition: '上海'
+        orderNumber: '123',
+        clientNumber: '123',
+        business: '中航',
+        flightNumber: '波音',
+        type: '大型',
+        beginCity: '上海',
+        endCity: '北京',
+        beginFilght: '早稻田',
+        endFilght: '银座',
+        onceMoney: '1110',
+        position: 'A31',
+        status: '未付款'
       },
       {
         date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄',
-        beginPosition: '上海'
+        orderNumber: '123',
+        clientNumber: '123',
+        business: '中航',
+        flightNumber: '波音',
+        type: '大型',
+        beginCity: '上海',
+        endCity: '北京',
+        beginFilght: '早稻田',
+        endFilght: '银座',
+        onceMoney: '1110',
+        position: 'A31',
+        status: '未付款'
       },
       {
         date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄',
-        beginPosition: '上海'
+        orderNumber: '123',
+        clientNumber: '123',
+        business: '中航',
+        flightNumber: '波音',
+        type: '大型',
+        beginCity: '上海',
+        endCity: '北京',
+        beginFilght: '早稻田',
+        endFilght: '银座',
+        onceMoney: '1110',
+        position: 'A31',
+        status: '未付款'
       },
       {
         date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄',
-        beginPosition: '上海'
+        orderNumber: '123',
+        clientNumber: '123',
+        business: '中航',
+        flightNumber: '波音',
+        type: '大型',
+        beginCity: '上海',
+        endCity: '北京',
+        beginFilght: '早稻田',
+        endFilght: '银座',
+        onceMoney: '1110',
+        position: 'A31',
+        status: '未付款'
       }],
       addVisible: false,
       timeRange: null,
@@ -186,7 +222,7 @@ export default {
   },
   computed: {
     getTableData () {
-      let result = []
+      let result = this.tableData
 
       if (this.timeRange !== null) {
         result = this.filter(this.tableData, this.timeRange, function (item, timeRange) {
@@ -223,7 +259,7 @@ export default {
   methods: {
     reset () {
       this.timeRange = null
-      this.startPosition = null
+      this.beginPosition = null
       this.endPosition = null
     },
     filter (tableData, filter, fn) {

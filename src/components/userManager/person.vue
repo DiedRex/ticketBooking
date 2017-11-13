@@ -14,17 +14,17 @@
 		</div>
 		<el-table :data="tableData" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange" scope="scope">
 				<el-table-column type="selection" width="55"></el-table-column>
-				<el-table-column prop="num" label=""  width="80">
+				<el-table-column type="index" width="50">
+        </el-table-column>
+				<el-table-column prop="name" label="姓名">
 				</el-table-column>
-				<el-table-column prop="name" label="姓名" width="180">
+				<el-table-column prop="user" label="用户名">
 				</el-table-column>
-				<el-table-column prop="user" label="用户名" width="180">
+				<el-table-column prop="phone" label="电话">
 				</el-table-column>
-				<el-table-column prop="phone" label="电话" width="180">
+				<el-table-column prop="role" label="角色">
 				</el-table-column>
-				<el-table-column prop="role" label="角色" width="180">
-				</el-table-column>
-				<el-table-column label="操作" width="300">
+				<el-table-column label="操作">
           <template slot-scope="scope">
             <el-button size="small">编辑</el-button>
             <el-button size="small" type="danger">删除</el-button>
@@ -83,42 +83,36 @@ export default {
     return {
       url: "./static/vuetable.json",
       tableData: [{
-          num : 1,
           user: "ll",
           name: "林丽",
           phone: "18819259282",
           role : "机长"
         },
         {
-          num : 1,
           user: "wm",
           name: "文敏",
           phone: "18819259282",
           role : "机长"
         },
         {
-          num : 1,
           user: "yxl",
           name: "杨秀兰",
           phone:"18819259282",
           role : "机长"
         },
         {
-          num : 1,
           user: "wq",
           name: "魏强",
           phone:"18819259282",
           role : "机长"
         },
         {
-          num : 1,
           user: "sxl",
           name: "石秀兰",
           phone:"18819259282",
           role : "机长"
         },
         {
-          num : 1,
           user: "zy",
           name: "朱洋",
           phone:"18819259282",

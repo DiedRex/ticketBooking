@@ -7,15 +7,14 @@ Vue.use(Router)
 export default new Router({
   routes: [{
     path: '/',
-    redirect: '/login'
+    redirect: '/index/1'
   },
   {
-    path: '/index',
+    path: '/readme',
     component: () => import('@/components/common/Home'),
     children: [{
       path: '/',
       component: index
-      // redirect: '/client'
     },
     {
       path: '/client',
@@ -43,11 +42,8 @@ export default new Router({
     }]
   },
   {
-    path: '/login',
-    component: () => import('@/components/other/login')
-  },
-  {
-    path: '/register',
-    component: () => import('@/components/other/register')
+    path: '/index',
+    component: () => import('@/components/other/login'),
+    props: (route) => ({ type: route.query.islogin })
   }]
 })

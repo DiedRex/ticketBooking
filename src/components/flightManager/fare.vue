@@ -10,7 +10,8 @@
     <el-container>
       <el-aside width="250px">
         <div class="asider-title">
-          <p>123dsadasdasdsad</p>
+          <p>123dsadasdasdsadddddddddddddddddddddd</p>
+          <p>123</p>
           <p>123</p>
           <p>123</p>
           <p>123</p>
@@ -169,14 +170,6 @@ export default {
         date: '2016-05-04',
         name: '王小虎',
         address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
       }],
       addVisible: false,
       timeRange: null,
@@ -245,33 +238,43 @@ export default {
 <style lang="stylus" scoped>
 .fare {
   .el-container {
-    margin-top: 3rem
+    margin-top: 2rem
   }
   .el-main {
     .el-form {
-      text-align: center
+      margin-left: 1rem
       .left-form, .right-form {
         display: inline-block
-        width: 35%
+        width: 28%
+        min-width: 21.875rem
       }
       .left-form {
-        margin-right: 15rem
+        margin-right: 5rem
       }
     }
   }
   .el-aside {
-    margin-right: 3rem
+    margin-right: 1rem
     .asider-title {
+      max-height: 40rem
       font-size: 2rem
       background: white
       color: #878d99
       border: .0625rem solid #e6ebf5
+      overflow-y: auto
       p {
-        height: 4rem
+        font-size: 1.2rem
         padding: 1rem
         border-top: .0625rem solid #e6ebf5
+        text-overflow: ellipsis
+        word-break: keep-all
         overflow: hidden
-        word-break: break-all
+        white-space: nowrap
+        cursor: pointer
+        &:hover {
+          background: rgba(204, 204, 204, 0.59)
+          box-shadow: 0px 0px 5px 0px rgba(216,88,169,0.74)
+        }
         &:first-child {
           border-top: 0
         }

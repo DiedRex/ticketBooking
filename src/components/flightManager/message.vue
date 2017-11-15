@@ -102,20 +102,63 @@ export default {
 		return {
 			tableData: [{
         date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
+        orderNumber: '123',
+        clientNumber: '123',
+        business: '中航',
+        flightNumber: '波音',
+        type: '大型',
+        beginCity: '上海',
+        endCity: '北京',
+        beginFilght: '早稻田',
+        endFilght: '银座',
+        onceMoney: '1110',
+        position: 'A31',
+        status: '未付款'
+      },
+      {
+        date: '2016-05-02',
+        orderNumber: '123',
+        clientNumber: '123',
+        business: '中航',
+        flightNumber: '波音',
+        type: '大型',
+        beginCity: '上海',
+        endCity: '北京',
+        beginFilght: '早稻田',
+        endFilght: '银座',
+        onceMoney: '1110',
+        position: 'A31',
+        status: '未付款'
+      },
+      {
+        date: '2016-05-02',
+        orderNumber: '123',
+        clientNumber: '123',
+        business: '中航',
+        flightNumber: '波音',
+        type: '大型',
+        beginCity: '上海',
+        endCity: '北京',
+        beginFilght: '早稻田',
+        endFilght: '银座',
+        onceMoney: '1110',
+        position: 'A31',
+        status: '未付款'
+      },
+      {
+        date: '2016-05-02',
+        orderNumber: '123',
+        clientNumber: '123',
+        business: '中航',
+        flightNumber: '波音',
+        type: '大型',
+        beginCity: '上海',
+        endCity: '北京',
+        beginFilght: '早稻田',
+        endFilght: '银座',
+        onceMoney: '1110',
+        position: 'A31',
+        status: '未付款'
       }],
       addVisible: false,
       timeRange: null,
@@ -167,8 +210,38 @@ export default {
 	},
   computed: {
     getTableData () {
+      let result = this.tableData
 
-      return this.tableData
+      if (this.timeRange !== null) {
+        result = this.filter(this.tableData, this.timeRange, function (item, timeRange) {
+          if((item.date >= timeRange[0]) && (item.date <= timeRange[1])) {
+            return true
+          }
+          return false
+        })
+      }
+
+      if (this.beginPosition !== null) {
+        result = this.filter(this.tableData, this.timeRange, function (item, beginPosition) {
+          if(item.beginPosition === beginPosition) {
+            return true
+          }
+          return false
+        })
+      }
+
+      if (this.endPosition !== null) {
+        result = this.filter(this.tableData, this.timeRange, function (item, endPosition) {
+          if(item.endPosition === endPosition) {
+            return true
+          }
+          return false
+        })
+      }
+
+      console.log(result)
+
+      return result
     }
   },
   methods: {
@@ -177,8 +250,10 @@ export default {
       this.startPosition = null
       this.endPosition = null
     },
-    add () {
-
+    filter (tableData, filter, fn) {
+      return tableData.filter(function (item, index, array) {
+        return fn(item, filter)
+      })
     }
   }
 }

@@ -32,34 +32,34 @@
       </el-header>
 
       <el-main>
-        <el-table border :data="getTableData" style="width: 100%">
+        <el-table border :data="getOrderData" style="width: 100%">
           <el-table-column type="index" width="50">
           </el-table-column>
-          <el-table-column prop="orderNumber" label="订单编号">
+          <el-table-column prop="OrderId" label="订单号">
           </el-table-column>
-          <el-table-column prop="clientNumber" label="客户编号">
+          <el-table-column prop="UserId" label="用户名">
           </el-table-column>
-          <el-table-column prop="business" label="航空公司">
+          <el-table-column prop="airline" label="航空公司">
           </el-table-column>
-          <el-table-column prop="flightNumber" label="航班号">
+          <el-table-column prop="Routedid" label="航线号">
           </el-table-column>
-          <el-table-column prop="type" label="机型">
+          <el-table-column prop="airtype" label="机型">
           </el-table-column>
-          <el-table-column prop="beginCity" label="出发城市">
+          <el-table-column prop="Departure" label="出发地">
           </el-table-column>
-          <el-table-column prop="endCity" label="到达城市">
+          <el-table-column prop="destination" label="目的地">
           </el-table-column>
-          <el-table-column prop="beginFilght" label="起飞机场">
+          <el-table-column prop="Depport" label="出发机场">
           </el-table-column>
-          <el-table-column prop="endFilght" label="到达机场">
+          <el-table-column prop="desport" label="目的机场">
           </el-table-column>
-          <el-table-column prop="date" label="日期" width="100">
+          <el-table-column prop="deptime" label="出发时间">
           </el-table-column>
-          <el-table-column prop="onceMoney" label="单程票价">
+          <el-table-column prop="fare" label="费用">
           </el-table-column>
-          <el-table-column prop="position" label="座次">
+          <el-table-column prop="Seatnum" label="座位号">
           </el-table-column>
-          <el-table-column prop="status" label="订单状态">
+          <el-table-column prop="State" label="付款状态">
           </el-table-column>
         </el-table>
       </el-main>
@@ -100,7 +100,7 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="addVisible = false">确 定</el-button>
+        <el-button type="primary" @click="addOrder">确 定</el-button>
         <el-button @click="addVisible = false">取 消</el-button>
       </span>
     </el-dialog>
@@ -108,70 +108,25 @@
 </template>
 
 <script>
-import { HTTP } from "@/api/index"
+import { HTTP, time } from "@/api/index"
 export default {
 	name: 'order',
 	data() {
 		return {
-			tableData: [{
-        date: '2016-05-02',
-        orderNumber: '123',
-        clientNumber: '123',
-        business: '中航',
-        flightNumber: '波音',
-        type: '大型',
-        beginCity: '上海',
-        endCity: '北京',
-        beginFilght: '早稻田',
-        endFilght: '银座',
-        onceMoney: '1110',
-        position: 'A31',
-        status: '未付款'
-      },
-      {
-        date: '2016-05-02',
-        orderNumber: '123',
-        clientNumber: '123',
-        business: '中航',
-        flightNumber: '波音',
-        type: '大型',
-        beginCity: '上海',
-        endCity: '北京',
-        beginFilght: '早稻田',
-        endFilght: '银座',
-        onceMoney: '1110',
-        position: 'A31',
-        status: '未付款'
-      },
-      {
-        date: '2016-05-02',
-        orderNumber: '123',
-        clientNumber: '123',
-        business: '中航',
-        flightNumber: '波音',
-        type: '大型',
-        beginCity: '上海',
-        endCity: '北京',
-        beginFilght: '早稻田',
-        endFilght: '银座',
-        onceMoney: '1110',
-        position: 'A31',
-        status: '未付款'
-      },
-      {
-        date: '2016-05-02',
-        orderNumber: '123',
-        clientNumber: '123',
-        business: '中航',
-        flightNumber: '波音',
-        type: '大型',
-        beginCity: '上海',
-        endCity: '北京',
-        beginFilght: '早稻田',
-        endFilght: '银座',
-        onceMoney: '1110',
-        position: 'A31',
-        status: '未付款'
+			orderData: [{
+        OrderId: '123', //订单号
+        UserId: '123', //用户名
+        airline: '中航', //航空公司
+        airtype: '大型', //机型
+        Routedid: '波音', //航线号
+        Departure: '上海', //出发地
+        destination: '北京', //目的地
+        Depport: '早稻田', //出发机场
+        desport: '银座', //目的机场
+        fare: '1110', //费用
+        Seatnum: 'A31', //座位号
+        State: '未付款', //付款状态
+        deptime: '2017-1' //出发时间
       }],
       addVisible: false,
       timeRange: null,
@@ -179,19 +134,7 @@ export default {
       endPosition: null,
       positions: [{
         value: '上海',
-        label: '黄金糕'
-      }, {
-        value: '选项2',
-        label: '双皮奶'
-      }, {
-        value: '选项3',
-        label: '蚵仔煎'
-      }, {
-        value: '选项4',
-        label: '龙须面'
-      }, {
-        value: '选项5',
-        label: '北京烤鸭'
+        label: '上海'
       }],
       form: {
         business: null,
@@ -217,16 +160,23 @@ export default {
           }
           return true
         }
-      },
+      }
 		}
   },
+  created () {
+    HTTP.post('/ordermanager/getorderInf').then((res) => {
+      console.log(this.res)
+    }).catch((error) => {
+			console.log(error)
+		})
+  },
   computed: {
-    getTableData () {
-      let result = this.tableData
+    getOrderData () {
+      let result = this.orderData
 
       if (this.timeRange !== null) {
-        result = this.filter(this.tableData, this.timeRange, function (item, timeRange) {
-          if((item.date >= timeRange[0]) && (item.date <= timeRange[1])) {
+        result = this.filter(result, this.timeRange, function (item, timeRange) {
+          if(time(item.deptime, timeRange)) {
             return true
           }
           return false
@@ -234,8 +184,9 @@ export default {
       }
 
       if (this.beginPosition !== null) {
-        result = this.filter(this.tableData, this.timeRange, function (item, beginPosition) {
-          if(item.beginPosition === beginPosition) {
+        console.log(this.beginPosition)
+        result = this.filter(result, this.beginPosition, function (item, beginPosition) {
+          if(item.Departure === beginPosition) {
             return true
           }
           return false
@@ -243,8 +194,8 @@ export default {
       }
 
       if (this.endPosition !== null) {
-        result = this.filter(this.tableData, this.timeRange, function (item, endPosition) {
-          if(item.endPosition === endPosition) {
+        result = this.filter(result, this.endPosition, function (item, endPosition) {
+          if(item.destination === endPosition) {
             return true
           }
           return false
@@ -266,6 +217,16 @@ export default {
       return tableData.filter(function (item, index, array) {
         return fn(item, filter)
       })
+    },
+    addOrder () {
+      HTTP.post('/ordermanager/addorderInf', {
+
+      }).then((res) => {
+
+      }).catch((error) => {
+        console.log(error)
+      })
+      this.addVisible = false
     }
   }
 }

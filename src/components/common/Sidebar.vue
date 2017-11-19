@@ -26,7 +26,7 @@ export default {
       items: [
         {
           icon: "el-icon-star-on",
-          index: "index",
+          index: "readme",
           title: "介绍"
         },
         {

@@ -1,10 +1,10 @@
 <template>
   <div class="login-wrap">
-    <div class="ms-title">{{this.type === '1' ? '后台管理系统' : '注册'}}</div>
+    <div class="ms-title">后台管理系统</div>
     <div class="ms-login">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm">
         <el-form-item prop="username">
-          <el-input v-model="ruleForm.username" placeholder="username"></el-input>
+          <el-input v-model="ruleForm.username" placeholder="account"></el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input type="password" placeholder="password" v-model="ruleForm.password" @keyup.enter.native="submitForm('ruleForm')"></el-input>

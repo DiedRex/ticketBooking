@@ -7,7 +7,7 @@ Vue.use(Router)
 export default new Router({
   routes: [{
     path: '/',
-    redirect: '/index/1'
+    redirect: '/index'
   },
   {
     path: '/readme',

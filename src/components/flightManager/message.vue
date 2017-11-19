@@ -15,7 +15,7 @@
         </div>
 
         <div class="position">
-          <el-select v-model="startPosition" placeholder="起飞地点">
+          <el-select v-model="beginPosition" placeholder="起飞地点">
             <el-option v-for="(position, index) in positions" :key="index" :label="position.label" :value="position.value">
             </el-option>
           </el-select>
@@ -31,63 +31,32 @@
       </el-header>
 
       <el-main>
-        <el-table border :data="getTableData" style="width: 100%">
+        <el-table border :data="getMessageData" style="width: 100%">
           <el-table-column type="index" width="50">
           </el-table-column>
-          <el-table-column label="航空公司">
-            <template slot-scope="scope">
-              110501
-            </template>
+          <el-table-column prop="airline" label="航空公司">
           </el-table-column>
-          <el-table-column label="航班号">
-            <template slot-scope="scope">
-              002
-            </template>
+          <el-table-column prop="Routeid" label="航线号">
           </el-table-column>
-          <el-table-column label="机型">
-            <template slot-scope="scope">
-              中航
-            </template>
+          <el-table-column prop="airtype" label="机型">
           </el-table-column>
-          <el-table-column label="起飞城市">
-            <template slot-scope="scope">
-              zh01
-            </template>
+          <el-table-column prop="Departure" label="出发地">
           </el-table-column>
-          <el-table-column label="到达城市">
-            <template slot-scope="scope">
-              波音
-            </template>
+          <el-table-column prop="destination" label="目的地">
           </el-table-column>
-          <el-table-column label="起飞时间">
-            <template slot-scope="scope">
-              广州
-            </template>
+          <el-table-column prop="Depport" label="出发机场">
           </el-table-column>
-          <el-table-column label="到达时间">
-            <template slot-scope="scope">
-              上海
-            </template>
+          <el-table-column prop="desport" label="目的机场">
           </el-table-column>
-          <el-table-column label="时长">
-            <template slot-scope="scope">
-              虹桥
-            </template>
+          <el-table-column prop="deptime" label="出发时间">
           </el-table-column>
-          <el-table-column label="日期">
-            <template slot-scope="scope">
-              白云
-            </template>
+          <el-table-column prop="Destime" label="到达时间">
           </el-table-column>
-          <el-table-column label="经济舱" width="100">
-            <template slot-scope="scope">
-              2017-11-06
-            </template>
+          <el-table-column prop="vipprice" label="商务座价格">
           </el-table-column>
-          <el-table-column label="公务舱">
-            <template slot-scope="scope">
-              552
-            </template>
+          <el-table-column prop="norprice" label="普通座价格">
+          </el-table-column>
+          <el-table-column prop="remarks" label="备注">
           </el-table-column>
         </el-table>
       </el-main>
@@ -96,89 +65,32 @@
 </template>
 
 <script>
+import { HTTP, time } from "@/api/index"
 export default {
 	name: 'message',
 	data() {
 		return {
-			tableData: [{
-        date: '2016-05-02',
-        orderNumber: '123',
-        clientNumber: '123',
-        business: '中航',
-        flightNumber: '波音',
-        type: '大型',
-        beginCity: '上海',
-        endCity: '北京',
-        beginFilght: '早稻田',
-        endFilght: '银座',
-        onceMoney: '1110',
-        position: 'A31',
-        status: '未付款'
-      },
-      {
-        date: '2016-05-02',
-        orderNumber: '123',
-        clientNumber: '123',
-        business: '中航',
-        flightNumber: '波音',
-        type: '大型',
-        beginCity: '上海',
-        endCity: '北京',
-        beginFilght: '早稻田',
-        endFilght: '银座',
-        onceMoney: '1110',
-        position: 'A31',
-        status: '未付款'
-      },
-      {
-        date: '2016-05-02',
-        orderNumber: '123',
-        clientNumber: '123',
-        business: '中航',
-        flightNumber: '波音',
-        type: '大型',
-        beginCity: '上海',
-        endCity: '北京',
-        beginFilght: '早稻田',
-        endFilght: '银座',
-        onceMoney: '1110',
-        position: 'A31',
-        status: '未付款'
-      },
-      {
-        date: '2016-05-02',
-        orderNumber: '123',
-        clientNumber: '123',
-        business: '中航',
-        flightNumber: '波音',
-        type: '大型',
-        beginCity: '上海',
-        endCity: '北京',
-        beginFilght: '早稻田',
-        endFilght: '银座',
-        onceMoney: '1110',
-        position: 'A31',
-        status: '未付款'
+			messageData: [{
+        Routeid: '123', //航线号
+        airline: '中航', //航空公司
+        airtype: '大型', //机型
+        Departure: '上海', //出发地
+        destination: '北京', //目的地
+        Depport: '早稻田', //出发机场
+        desport: '银座', //目的机场
+        deptime: '2016-05-02', //出发时间
+        Destime: '2016-2-1', //到达时间
+        vipprice: '1110', //商务座价格
+        norprice: '1233', //普通座价格
+        remarks: 'A31' //备注
       }],
       addVisible: false,
       timeRange: null,
-      startPosition: null,
+      beginPosition: null,
       endPosition: null,
       positions: [{
         value: '上海',
         label: '黄金糕'
-      }, {
-        value: '选项2',
-        label: '双皮奶'
-      }, {
-        value: '选项3',
-        label: '蚵仔煎'
-      }, {
-        value: '选项4',
-        label: '龙须面'
-      }, {
-        value: '选项5',
-        label: '北京烤鸭'
       }],
       form: {
           name: '',
@@ -207,14 +119,21 @@ export default {
         }
       },
 		}
-	},
+  },
+  created () {
+    HTTP.post('/flightmanager/getRouteInf').then((res) => {
+      console.log(this.res)
+    }).catch((error) => {
+			console.log(error)
+		})
+  },
   computed: {
-    getTableData () {
-      let result = this.tableData
+    getMessageData () {
+      let result = this.messageData
 
       if (this.timeRange !== null) {
-        result = this.filter(this.tableData, this.timeRange, function (item, timeRange) {
-          if((item.date >= timeRange[0]) && (item.date <= timeRange[1])) {
+        result = this.filter(result, this.timeRange, function (item, timeRange) {
+          if(time(item.deptime, timeRange)) {
             return true
           }
           return false
@@ -222,8 +141,8 @@ export default {
       }
 
       if (this.beginPosition !== null) {
-        result = this.filter(this.tableData, this.timeRange, function (item, beginPosition) {
-          if(item.beginPosition === beginPosition) {
+        result = this.filter(result, this.beginPosition, function (item, beginPosition) {
+          if(item.Departure === beginPosition) {
             return true
           }
           return false
@@ -231,8 +150,8 @@ export default {
       }
 
       if (this.endPosition !== null) {
-        result = this.filter(this.tableData, this.timeRange, function (item, endPosition) {
-          if(item.endPosition === endPosition) {
+        result = this.filter(result, this.endPosition, function (item, endPosition) {
+          if(item.destination === endPosition) {
             return true
           }
           return false
@@ -247,7 +166,7 @@ export default {
   methods: {
     reset () {
       this.timeRange = null
-      this.startPosition = null
+      this.beginPosition = null
       this.endPosition = null
     },
     filter (tableData, filter, fn) {

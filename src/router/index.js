@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-const index = () => import('@/components/index')
 
 Vue.use(Router)
 
@@ -14,7 +13,7 @@ export default new Router({
     component: () => import('@/components/common/Home'),
     children: [{
       path: '/',
-      component: index
+      component: () => import('@/components/other/readme')
     },
     {
       path: '/client',
@@ -43,7 +42,7 @@ export default new Router({
   },
   {
     path: '/index',
-    component: () => import('@/components/other/login'),
+    component: () => import('@/components/index'),
     props: (route) => ({ type: route.query.islogin })
   }]
 })

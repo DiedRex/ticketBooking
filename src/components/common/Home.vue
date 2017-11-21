@@ -45,7 +45,7 @@ export default {
     }
     .el-dialog {
       .el-dialog__body {
-        padding: 25px 35px 30px 27px
+        padding: 25px 35px 0px 27px
       }
       .el-select, .el-date-editor {
         width: 100%

@@ -21,7 +21,7 @@
 				</el-table-column>
 				<el-table-column prop="client_number" label="客户编号">
 				</el-table-column>
-				<el-table-column prop="license_number" label="证件号" width="100">
+				<el-table-column prop="license_number" label="证件号">
 				</el-table-column>
 				<el-table-column prop="userphone" label="电话" width="120">
 				</el-table-column>

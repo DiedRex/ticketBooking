@@ -29,13 +29,7 @@
           </template>
 				</el-table-column>
 		</el-table>
-		<!-- <div class="pagination">
-      <el-pagination @current-change ="handleCurrentChange" layout="prev, pager, next" :total="1000">
-      </el-pagination>
-		</div> -->
 
-
-    <!-- 新增用户信息录入 -->
     <el-dialog title="录入人员" :visible.sync="addVisible" class="dialog-body" width="40%" center>
       <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="姓名" >

@@ -36,15 +36,6 @@ export default {
         margin-right: 1.25rem
         margin-top: 1.25rem
       }
-      .timeRange {
-        width: 21.875rem
-      }
-      .position {
-        width: 28.4375rem
-      }
-      .btn {
-        width: 12.5rem
-      }
     }
     .el-main {
       padding: 0

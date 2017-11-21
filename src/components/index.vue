@@ -1,69 +1,109 @@
 <template>
-  <div>
-    <div class="ms-doc">
-      <h3>关于</h3>
-      <article>
-        <h1>航空机票后台管理系统</h1>
-        </br>
-        <p>基于vue-manage-system搭建的后台管理系统</p>
-        <p>github链接：https://github.com/lin-xin/vue-manage-system</p>
-      </article>
+  <div class="login-wrap">
+    <div class="ms-title">{{this.type === '1' ? '后台管理系统' : '修改密码'}}</div>
+    <div class="ms-login">
+      <el-form :model="ruleForm" ref="ruleForm" label-width="0px" class="demo-ruleForm">
+        <el-form-item prop="username" v-if="this.type === '1'">
+          <el-input v-model="ruleForm.username" placeholder="account"></el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input type="password" placeholder="password" v-model="ruleForm.password" @keyup.enter.native="submitForm('ruleForm')"></el-input>
+        </el-form-item>
+        <el-form-item prop="newPassword" v-if="this.type !== '1'">
+          <el-input type="password" placeholder="new password" v-model="ruleForm.newPassword" @keyup.enter.native="submitForm('ruleForm')"></el-input>
+        </el-form-item>
+        <el-form-item prop="repeat" v-if="this.type !== '1'">
+          <el-input type="password" placeholder="repeat password" v-model="ruleForm.repeat" @keyup.enter.native="submitForm('ruleForm')"></el-input>
+        </el-form-item>
+        <div class="login-btn">
+          <el-button type="primary" @click="submitForm">{{this.type === '1' ? '登录' : '修改'}}</el-button>
+        </div>
+      </el-form>
     </div>
   </div>
 </template>
 
 <script>
+import { HTTP } from '@/api/index'
 export default {
   data: function() {
-    return {}
+    return {
+      ruleForm: {
+        username: "",
+        password: "",
+        newPassword: "",
+        repeat: ""
+      }
+    };
+  },
+  methods: {
+    submitForm () {
+      const self = this
+      if (self.ruleForm.newPassword === self.ruleForm.repeat && self.ruleForm.password !== '' && self.ruleForm.newPassword !== '') {
+        HTTP.post('/security/checkbyJson.action', {
+          managername: self.ruleForm.username,
+          manpassword: self.ruleForm.password
+        }).then((res) => {
+          self.$router.push("/readme")
+        }).catch((err) => {
+          console.log(err)
+        })
+      }
+      self.$router.push("/readme")
+    },
+    changeType () {
+      this.type = this.type === '1' ? '2' : '1'
+    }
+  },
+  props: {
+    type: {
+      default: '1'
+    }
   }
 };
 </script>
 
-<style scoped>
-.ms-doc {
+<style lang="stylus" scoped>
+.login-wrap {
+  position: relative;
   width: 100%;
-  max-width: 980px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
-    sans-serif;
+  height: 100%;
+  .tip {
+    display: inline-block
+    font-size: 12px
+    color: #999
+    cursor: pointer
+    margin-top: 0.5rem
+    &:hover {
+      text-decoration: underline
+      color: rgba(57, 57, 243, 0.64)
+    }
+  }
 }
-.ms-doc h3 {
-  padding: 9px 10px 10px;
-  margin: 0;
-  font-size: 14px;
-  line-height: 17px;
-  background-color: #f5f5f5;
-  border: 1px solid #d8d8d8;
-  border-bottom: 0;
-  border-radius: 3px 3px 0 0;
+.ms-title {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  margin-top: -230px;
+  text-align: center;
+  font-size: 30px;
+  color: #fff
 }
-.ms-doc article {
-  padding: 45px;
-  word-wrap: break-word;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
+.ms-login {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 300px;
+  margin: -150px 0 0 -190px;
+  padding: 40px;
+  border-radius: 5px;
+  background: #fff;
 }
-.ms-doc article h1 {
-  font-size: 32px;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #ddd;
+.login-btn {
+  text-align: center;
 }
-.ms-doc article h2 {
-  margin: 24px 0 16px;
-  font-weight: 600;
-  line-height: 1.25;
-  padding-bottom: 7px;
-  font-size: 24px;
-  border-bottom: 1px solid #eee;
-}
-.ms-doc article p {
-  margin-bottom: 15px;
-  line-height: 1.5
-}
-.ms-doc article .el-checkbox {
-  margin-bottom: 5px;
+.login-btn button {
+  width: 100%;
+  height: 36px;
 }
 </style>

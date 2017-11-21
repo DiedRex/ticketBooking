@@ -36,7 +36,7 @@ export default {
       }
       if (command == "changePassword") {
         localStorage.removeItem("ms_username");
-        this.$router.push("/login");
+        this.$router.push("/index?islogin=2");
       }
     }
   }

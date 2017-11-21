@@ -24,8 +24,7 @@ a{text-decoration: none}
     margin-bottom: 20px;
 }
 .pagination{
-    margin: 20px 0;
-    text-align: right;
+    text-align: center;
 }
 .plugins-tips{
     padding:20px 10px;

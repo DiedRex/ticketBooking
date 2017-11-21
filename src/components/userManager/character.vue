@@ -9,26 +9,25 @@
 		<div class="handle-box">
 			<el-button type="primary" icon="el-icon-plus" class="handle-but">新增用户</el-button>
 			<el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
-			<el-button type="primary" icon="el-icon-search" @click="search" class="handle-but mr10">搜索</el-button>
 		</div>
-		<el-table :data="tableData" border style="width: 70%" ref="multipleTable" @selection-change="handleSelectionChange" scope="scope">
-				<el-table-column prop="num" label=""  width="80">
+		<el-table :data="tableData" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange" scope="scope">
+				<el-table-column type="index" width="50">
 				</el-table-column>
-				<el-table-column prop="role" label="角色编码" width="180">
+				<el-table-column prop="role" label="角色编码">
 				</el-table-column>
-				<el-table-column prop="name" label="角色名称" width="180">
+				<el-table-column prop="name" label="角色名称">
 				</el-table-column>
-				<el-table-column label="操作">
+				<el-table-column label="操作" width="240" class-name="pagination">
           <template slot-scope="scope">
             <el-button size="small" type="danger" class="zone">删除</el-button>
             <el-button size="small" class="zone">用户</el-button>
           </template>
 				</el-table-column>
 		</el-table>
-		<div class="pagination">
+		<!-- <div class="pagination">
       <el-pagination @current-change ="handleCurrentChange" layout="prev, pager, next" :total="1000">
       </el-pagination>
-		</div>
+		</div> -->
 	</div>
 </template>
 
@@ -177,19 +176,19 @@ export default {
   width: 300px;
   display: inline-block;
   margin-top: .625rem;
-  margin-left: .3125rem;
+  margin-right: 1.25rem;
 }
 
 .handle-but{
   margin-top: .625rem;
-  margin-left: .3125rem;
+  margin-right: 1.25rem;
 }
 
-.pagination{
-  text-align : center;
+.alignCenter{
+  text-align: center;
 }
 .zone{
   margin-bottom:5px;
-  margin-left : 10px;
+  margin-right : 10px;
 }
 </style>

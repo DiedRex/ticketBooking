@@ -9,16 +9,15 @@
 		<div class="handle-box">
 			<el-button type="primary" icon="el-icon-plus" class="handle-but">新增用户</el-button>
 			<el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
-			<el-button type="primary" icon="el-icon-search" @click="search" class="handle-but mr10">搜索</el-button>
 		</div>
-		<el-table :data="tableData" border style="width: 70%" ref="multipleTable" @selection-change="handleSelectionChange" scope="scope">
+		<el-table :data="tableData" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange" scope="scope">
 				<el-table-column type="index" width="50">
 				</el-table-column>
 				<el-table-column prop="role" label="角色编码">
 				</el-table-column>
 				<el-table-column prop="name" label="角色名称">
 				</el-table-column>
-				<el-table-column label="操作" width="240">
+				<el-table-column label="操作" width="240" class-name="pagination">
           <template slot-scope="scope">
             <el-button size="small" type="danger" class="zone">删除</el-button>
             <el-button size="small" class="zone">用户</el-button>
@@ -185,8 +184,8 @@ export default {
   margin-right: 1.25rem;
 }
 
-.pagination{
-  text-align : center;
+.alignCenter{
+  text-align: center;
 }
 .zone{
   margin-bottom:5px;

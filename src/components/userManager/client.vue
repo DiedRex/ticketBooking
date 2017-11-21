@@ -11,7 +11,6 @@
     <!-- 搜索框 -->
 		<div class="handle-box">
 			<el-input  v-model="select_word" placeholder="筛选关键词" class="handle-input"></el-input>
-			<el-button type="primary" icon="el-icon-search" @click="search" class="handle-but">搜索</el-button>
 		</div>
 
     <!-- 表单数据 -->
@@ -28,7 +27,7 @@
 				</el-table-column>
 				<el-table-column prop="frequency" label="已购票次数">
 				</el-table-column>
-				<el-table-column label="操作" width="300">
+				<el-table-column label="操作" width="300" class-name="pagination">
           <template slot-scope="scope">
             <el-button size="small">拉黑</el-button>
             <el-button size="small" type="danger">取消拉黑</el-button>
@@ -175,9 +174,5 @@ export default {
 .handle-but{
   margin-top: .625rem;
   margin-right: 1.25rem;
-}
-
-.pagination{
-  text-align : center;
 }
 </style>

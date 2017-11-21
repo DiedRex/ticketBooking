@@ -1,5 +1,5 @@
 <template>
-	<div class="table">
+	<div class="person">
 		<div class="crumbs">
 			<el-breadcrumb separator="/">
 				<el-breadcrumb-item><i class="el-icon-menu"></i> 用户管理</el-breadcrumb-item>
@@ -7,12 +7,10 @@
 			</el-breadcrumb>
 		</div>
 		<div class="handle-box">
-      <el-button type="primary" icon="el-icon-delete" class="handle-but" @click="delAll">批量删除</el-button>
 			<el-button type="primary" icon="el-icon-plus" class="handle-but"  @click="addVisible=true">新增用户</el-button>
 			<el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
-			<el-button type="primary" icon="el-icon-search" @click="search" class="handle-but">搜索</el-button>
 		</div>
-		<el-table :data="getTabledata" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange" scope="scope">
+		<el-table :data="getTabledata" border style="width: 100%;margin-top:1rem" ref="multipleTable" @selection-change="handleSelectionChange" scope="scope">
 				<el-table-column type="selection" width="55"></el-table-column>
 				<el-table-column type="index" width="50">
         </el-table-column>
@@ -24,7 +22,7 @@
 				</el-table-column>
 				<el-table-column prop="role" label="角色">
 				</el-table-column>
-				<el-table-column label="操作" width="300">
+				<el-table-column label="操作" width="300" class-name="pagination">
           <template slot-scope="scope">
             <el-button size="small">编辑</el-button>
             <el-button size="small" type="danger">删除</el-button>
@@ -39,7 +37,7 @@
 
 
     <!-- 新增用户信息录入 -->
-    <el-dialog title="录入人员" :visible.sync="addVisible" width="30%" center>
+    <el-dialog title="录入人员" :visible.sync="addVisible" class="dialog-body" width="40%" center>
       <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="姓名" >
           <el-input v-model="form.name" class="set-width"></el-input>
@@ -79,6 +77,7 @@
 
 <script>
 export default {
+  name: 'person',
   data() {
     return {
       url: "./static/vuetable.json",
@@ -222,14 +221,11 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.handle-box {
-  margin-bottom: 20px
-}
 .handle-select {
-  width: 120px;
+  width: 7.5rem;
 }
 .handle-input {
-  width: 300px;
+  width: 18.75rem;
   display: inline-block;
   margin-top: .625rem;
   margin-right: 1.25rem;
@@ -242,11 +238,14 @@ export default {
 }
 
 .pagination{
-  text-align : center;
+  text-align : center
 }
 
 .set-width{
-  width:75%;
+  width:100%;
 }
 
+.dialog-body{
+  padding : 25px 35px 0px 27px;
+}
 </style>

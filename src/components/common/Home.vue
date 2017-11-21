@@ -64,5 +64,11 @@ export default {
       }
     }
   }
+
+  .person{
+    .el-dialog__body{
+      padding : 25px 35px 0px 27px
+    }
+  }
 }
 </style>

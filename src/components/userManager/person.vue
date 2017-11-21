@@ -11,14 +11,13 @@
 			<el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
 		</div>
 		<el-table :data="getTabledata" border style="width: 100%;margin-top:1rem" ref="multipleTable" @selection-change="handleSelectionChange" scope="scope">
-				<el-table-column type="selection" width="55"></el-table-column>
 				<el-table-column type="index" width="50">
         </el-table-column>
 				<el-table-column prop="name" label="姓名" >
 				</el-table-column>
 				<el-table-column prop="user" label="用户名" >
 				</el-table-column>
-				<el-table-column prop="phone" label="电话" width="120">
+				<el-table-column prop="phone" label="电话" width="200">
 				</el-table-column>
 				<el-table-column prop="role" label="角色">
 				</el-table-column>
@@ -30,13 +29,7 @@
           </template>
 				</el-table-column>
 		</el-table>
-		<!-- <div class="pagination">
-      <el-pagination @current-change ="handleCurrentChange" layout="prev, pager, next" :total="1000">
-      </el-pagination>
-		</div> -->
 
-
-    <!-- 新增用户信息录入 -->
     <el-dialog title="录入人员" :visible.sync="addVisible" class="dialog-body" width="40%" center>
       <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="姓名" >

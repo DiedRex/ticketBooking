@@ -12,19 +12,19 @@
 			<el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
 			<el-button type="primary" icon="el-icon-search" @click="search" class="handle-but">搜索</el-button>
 		</div>
-		<el-table :data="tableData" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange" scope="scope">
+		<el-table :data="getTabledata" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange" scope="scope">
 				<el-table-column type="selection" width="55"></el-table-column>
 				<el-table-column type="index" width="50">
         </el-table-column>
-				<el-table-column prop="name" label="姓名">
+				<el-table-column prop="name" label="姓名" >
 				</el-table-column>
-				<el-table-column prop="user" label="用户名">
+				<el-table-column prop="user" label="用户名" >
 				</el-table-column>
-				<el-table-column prop="phone" label="电话">
+				<el-table-column prop="phone" label="电话" width="120">
 				</el-table-column>
 				<el-table-column prop="role" label="角色">
 				</el-table-column>
-				<el-table-column label="操作">
+				<el-table-column label="操作" width="300">
           <template slot-scope="scope">
             <el-button size="small">编辑</el-button>
             <el-button size="small" type="danger">删除</el-button>
@@ -32,10 +32,10 @@
           </template>
 				</el-table-column>
 		</el-table>
-		<div class="pagination">
+		<!-- <div class="pagination">
       <el-pagination @current-change ="handleCurrentChange" layout="prev, pager, next" :total="1000">
       </el-pagination>
-		</div>
+		</div> -->
 
 
     <!-- 新增用户信息录入 -->
@@ -83,36 +83,42 @@ export default {
     return {
       url: "./static/vuetable.json",
       tableData: [{
+          num : 1,
           user: "ll",
           name: "林丽",
           phone: "18819259282",
           role : "机长"
         },
         {
+          num : 1,
           user: "wm",
           name: "文敏",
           phone: "18819259282",
           role : "机长"
         },
         {
+          num : 1,
           user: "yxl",
           name: "杨秀兰",
           phone:"18819259282",
           role : "机长"
         },
         {
+          num : 1,
           user: "wq",
           name: "魏强",
           phone:"18819259282",
           role : "机长"
         },
         {
+          num : 1,
           user: "sxl",
           name: "石秀兰",
           phone:"18819259282",
           role : "机长"
         },
         {
+          num : 1,
           user: "zy",
           name: "朱洋",
           phone:"18819259282",
@@ -136,12 +142,22 @@ export default {
       }
     };
   },
-  created() {
-    this.getData();
-  },
   computed: {
-    data() {
-
+    getTabledata() {
+      let result = this.tableData;
+      //更新的是newTabledata
+      if(this.is_search&&this.select_word !== null){
+        result = this.isSearch(this.tableData,this.select_word,function(item,word){
+          if(item){
+            console.log(item)
+            console.log(word)
+            return true
+          }
+          return false
+        });
+      }
+      console.log(result);
+      return result;
     }
   },
   methods: {
@@ -149,17 +165,26 @@ export default {
       this.cur_page = val;
       this.getData();
     },
-    getData() {
-      // // 用axios从json数据中获得数据数组
-      // let self = this;
-      // console.log(self);
-      // self.$axios.get(self.url).then(res =>{
-      //   self.tableData = res.data.list;
-      //   for(let i = 0;i<self.tableData.length;i++){
-      //     self.tableData[i].num = i+1;
-      //   }
-      //   console.log(self.tableData);
-      // });
+    isSearch(tableData, filter, fn){
+      return tableData.filter(function(item,index,array){
+        console.log(index);
+        return fn(item,filter);
+      })
+    },
+    // getData() {
+    //   // // 用axios从json数据中获得数据数组
+    //   // let self = this;
+    //   // console.log(self);
+    //   // self.$axios.get(self.url).then(res =>{
+    //   //   self.tableData = res.data.list;
+    //   //   for(let i = 0;i<self.tableData.length;i++){
+    //   //     self.tableData[i].num = i+1;
+    //   //   }
+    //   //   console.log(self.tableData);
+    //   // });
+    // },
+    search(){
+      this.is_search = true;
     },
     resetForm(){
       this.form.name =null;
@@ -207,12 +232,13 @@ export default {
   width: 300px;
   display: inline-block;
   margin-top: .625rem;
-  margin-left: .3125rem;
+  margin-right: 1.25rem;
 }
 
 .handle-but{
   margin-top: .625rem;
-  margin-left: .3125rem;
+  margin-right: 1.25rem;
+  margin-left: 0;
 }
 
 .pagination{

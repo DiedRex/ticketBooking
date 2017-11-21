@@ -10,23 +10,23 @@
 
     <!-- 搜索框 -->
 		<div class="handle-box">
-			<el-input  v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
-			<el-button type="primary" icon="el-icon-search" @click="search" class="handle-but mr10">搜索</el-button>
+			<el-input  v-model="select_word" placeholder="筛选关键词" class="handle-input"></el-input>
+			<el-button type="primary" icon="el-icon-search" @click="search" class="handle-but">搜索</el-button>
 		</div>
 
     <!-- 表单数据 -->
 		<el-table :data="tableData" border style="width: 100%" ref="multipleTable">
-				<el-table-column prop="num" label=""  width="80">
+				<el-table-column type="index" width="50">
 				</el-table-column>
-				<el-table-column prop="name" label="姓名" width="160">
+				<el-table-column prop="name" label="姓名">
 				</el-table-column>
-				<el-table-column prop="client_number" label="客户编号" width="160">
+				<el-table-column prop="client_number" label="客户编号">
 				</el-table-column>
-				<el-table-column prop="license_number" label="证件号" width="160">
+				<el-table-column prop="license_number" label="证件号" width="100">
 				</el-table-column>
-				<el-table-column prop="phone" label="电话" width="160">
+				<el-table-column prop="phone" label="电话" width="120">
 				</el-table-column>
-				<el-table-column prop="frequency" label="已购票次数" width="160">
+				<el-table-column prop="frequency" label="已购票次数">
 				</el-table-column>
 				<el-table-column label="操作" width="300">
           <template slot-scope="scope">
@@ -36,10 +36,10 @@
           </template>
 				</el-table-column>
 		</el-table>
-		<div class="pagination">
+		<!-- <div class="pagination">
       <el-pagination @current-change ="handleCurrentChange" layout="prev, pager, next" :total="1000">
       </el-pagination>
-		</div>
+		</div> -->
 	</div>
 </template>
 
@@ -169,11 +169,12 @@ export default {
 .handle-input {
   width: 300px;
   display: inline-block;
+  margin-right: 1.25rem;
 }
 
 .handle-but{
   margin-top: .625rem;
-  margin-left: .3125rem;
+  margin-right: 1.25rem;
 }
 
 .pagination{

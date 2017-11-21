@@ -7,15 +7,15 @@
 			</el-breadcrumb>
 		</div>
 		<div class="handle-box">
-			<el-button type="primary" icon="el-icon-plus" class="handle-but">新增用户</el-button>
+			<el-button type="primary" icon="el-icon-plus" class="handle-but" @click="addVisible=true">新增用户</el-button>
 			<el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
 		</div>
 		<el-table :data="tableData" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange" scope="scope">
 				<el-table-column type="index" width="50">
 				</el-table-column>
-				<el-table-column prop="role" label="角色编码">
+				<el-table-column prop="encoding" label="角色编码">
 				</el-table-column>
-				<el-table-column prop="name" label="角色名称">
+				<el-table-column prop="rolename" label="角色名称">
 				</el-table-column>
 				<el-table-column label="操作" width="240" class-name="pagination">
           <template slot-scope="scope">
@@ -24,6 +24,29 @@
           </template>
 				</el-table-column>
 		</el-table>
+
+        <!-- 新增角色信息录入 -->
+    <el-dialog title="角色录入" :visible.sync="addVisible" class="dialog-body" width="40%" center>
+      <el-form ref="form" :model="form" label-width="80px">
+        <el-form-item label="角色编码" >
+          <el-input v-model="form.encoding" class="set-width"></el-input>
+        </el-form-item>
+        <el-form-item label="角色名称">
+          <el-select v-model="form.rolename" placeholder="请分配角色名称" class="set-width">
+            <el-option label="管理员"></el-option>
+            <el-option label="机长"></el-option>
+            <el-option label="乘务员"></el-option>
+            <el-option label="安检人员"></el-option>
+            <el-option label="技术人员"></el-option>
+            <el-option label="后勤人员"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="addVisible = false">确 定</el-button>
+        <el-button @click="addVisible = false">取 消</el-button>
+      </span>
+    </el-dialog>
 		<!-- <div class="pagination">
       <el-pagination @current-change ="handleCurrentChange" layout="prev, pager, next" :total="1000">
       </el-pagination>
@@ -38,73 +61,18 @@ export default {
       url: "./static/vuetable.json",
       tableData: [{
           num : 1,
-          user: "ll",
-          name: "林丽",
-          phone: "18819259282",
-          role : "机长"
-        },
-        {
-          num : 1,
-          user: "wm",
-          name: "文敏",
-          phone: "18819259282",
-          role : "机长"
-        },
-        {
-          num : 1,
-          user: "yxl",
-          name: "杨秀兰",
-          phone:"18819259282",
-          role : "机长"
-        },
-        {
-          num : 1,
-          user: "wq",
-          name: "魏强",
-          phone:"18819259282",
-          role : "机长"
-        },
-        {
-          num : 1,
-          user: "sxl",
-          name: "石秀兰",
-          phone:"18819259282",
-          role : "机长"
-        },
-        {
-          num : 1,
-          user: "zy",
-          name: "朱洋",
-          phone:"18819259282",
-          role : "机长"
-        },
-        {
-          num : 1,
-          user: "fm",
-          name: "傅敏",
-          phone:"18819259282",
-          role : "机长"
-        },
-        {
-          num : 1,
-          user: "mm",
-          name: "毛明",
-          phone:"18819259282",
-          role : "机长"
-        },
-        {
-          num : 1,
           user: "hj",
           name: "何静",
           phone:"18819259282",
           role : "机长"
         }],
-      cur_page: 1,
-      multipleSelection: [],
-      select_cate: "",
+      addVisible: false,
       select_word: "",
-      del_list: [],
-      is_search: false
+      is_search: false,
+      form:{
+        encoding:null,
+        rolename:null
+      }
     };
   },
   created() {
@@ -116,10 +84,6 @@ export default {
     }
   },
   methods: {
-    handleCurrentChange(val) {
-      this.cur_page = val;
-      this.getData();
-    },
     getData() {
       // // 用axios从json数据中获得数据数组
       // let self = this;
@@ -134,32 +98,6 @@ export default {
     },
     search() {
       this.is_search = true;
-    },
-    formatter(row, column) {
-      return row.address;
-    },
-    filterTag(value, row) {
-      return row.tag === value;
-    },
-    handleEdit(index, row) {
-      this.$message("编辑第" + (index + 1) + "行");
-    },
-    handleDelete(index, row) {
-      this.$message.error("删除第" + (index + 1) + "行");
-    },
-    delAll() {
-      const self = this,
-        length = self.multipleSelection.length;
-      let str = "";
-      self.del_list = self.del_list.concat(self.multipleSelection);
-      for (let i = 0; i < length; i++) {
-        str += self.multipleSelection[i].name + " ";
-      }
-      self.$message.error("删除了" + str);
-      self.multipleSelection = [];
-    },
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
     }
   }
 };
@@ -191,4 +129,9 @@ export default {
   margin-bottom:5px;
   margin-right : 10px;
 }
+
+.set-width{
+  width:100%;
+}
+
 </style>

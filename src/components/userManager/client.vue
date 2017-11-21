@@ -1,5 +1,5 @@
 <template>
-	<div class="table">
+	<div class="client">
     <!-- 面包屑导航 -->
 		<div class="crumbs">
 			<el-breadcrumb separator="/">
@@ -23,14 +23,12 @@
 				</el-table-column>
 				<el-table-column prop="license_number" label="证件号" width="100">
 				</el-table-column>
-				<el-table-column prop="phone" label="电话" width="120">
+				<el-table-column prop="userphone" label="电话" width="120">
 				</el-table-column>
 				<el-table-column prop="frequency" label="已购票次数">
 				</el-table-column>
-				<el-table-column label="操作" width="300" class-name="pagination">
+				<el-table-column label="操作" width="120" class-name="pagination">
           <template slot-scope="scope">
-            <el-button size="small">拉黑</el-button>
-            <el-button size="small" type="danger">取消拉黑</el-button>
             <el-button size="small" type="warning">订单查看</el-button>
           </template>
 				</el-table-column>
@@ -55,48 +53,8 @@ export default {
           phone: "18819259282",
           frequency:0,
           role : "机长"
-        },
-        {
-          num : 1,
-          name: "林丽",
-          client_number:"001",
-          license_number:"axf000000",
-          phone: "18819259282",
-          frequency:0,
-          role : "机长"
-        },
-        {
-          num : 1,
-          name: "林丽",
-          client_number:"001",
-          license_number:"axf000000",
-          phone: "18819259282",
-          frequency:0,
-          role : "机长"
-        },
-        {
-          num : 1,
-          name: "林丽",
-          client_number:"001",
-          license_number:"axf000000",
-          phone: "18819259282",
-          frequency:0,
-          role : "机长"
-        },
-        {
-          num : 1,
-          name: "林丽",
-          client_number:"001",
-          license_number:"axf000000",
-          phone: "18819259282",
-          frequency:0,
-          role : "机长"
         }],
-      cur_page: 1,
-      multipleSelection: [],
-      select_cate: "",
       select_word: "",
-      del_list: [],
       is_search: false,
     };
   },
@@ -109,10 +67,6 @@ export default {
     }
   },
   methods: {
-    handleCurrentChange(val) {
-      this.cur_page = val;
-      this.getData();
-    },
     getData() {
       // // 用axios从json数据中获得数据数组
       // let self = this;
@@ -127,32 +81,6 @@ export default {
     },
     search() {
       this.is_search = true;
-    },
-    formatter(row, column) {
-      return row.address;
-    },
-    filterTag(value, row) {
-      return row.tag === value;
-    },
-    handleEdit(index, row) {
-      this.$message("编辑第" + (index + 1) + "行");
-    },
-    handleDelete(index, row) {
-      this.$message.error("删除第" + (index + 1) + "行");
-    },
-    delAll() {
-      const self = this,
-        length = self.multipleSelection.length;
-      let str = "";
-      self.del_list = self.del_list.concat(self.multipleSelection);
-      for (let i = 0; i < length; i++) {
-        str += self.multipleSelection[i].name + " ";
-      }
-      self.$message.error("删除了" + str);
-      self.multipleSelection = [];
-    },
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
     }
   }
 };

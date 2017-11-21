@@ -1,5 +1,5 @@
 <template>
-	<div class="table">
+	<div class="person">
 		<div class="crumbs">
 			<el-breadcrumb separator="/">
 				<el-breadcrumb-item><i class="el-icon-menu"></i> 用户管理</el-breadcrumb-item>
@@ -7,24 +7,22 @@
 			</el-breadcrumb>
 		</div>
 		<div class="handle-box">
-      <el-button type="primary" icon="el-icon-delete" class="handle-but" @click="delAll">批量删除</el-button>
 			<el-button type="primary" icon="el-icon-plus" class="handle-but"  @click="addVisible=true">新增用户</el-button>
 			<el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
-			<el-button type="primary" icon="el-icon-search" @click="search" class="handle-but">搜索</el-button>
 		</div>
-		<el-table :data="tableData" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange" scope="scope">
+		<el-table :data="getTabledata" border style="width: 100%;margin-top:1rem" ref="multipleTable" @selection-change="handleSelectionChange" scope="scope">
 				<el-table-column type="selection" width="55"></el-table-column>
 				<el-table-column type="index" width="50">
         </el-table-column>
-				<el-table-column prop="name" label="姓名">
+				<el-table-column prop="name" label="姓名" >
 				</el-table-column>
-				<el-table-column prop="user" label="用户名">
+				<el-table-column prop="user" label="用户名" >
 				</el-table-column>
-				<el-table-column prop="phone" label="电话">
+				<el-table-column prop="phone" label="电话" width="120">
 				</el-table-column>
 				<el-table-column prop="role" label="角色">
 				</el-table-column>
-				<el-table-column label="操作">
+				<el-table-column label="操作" width="300" class-name="pagination">
           <template slot-scope="scope">
             <el-button size="small">编辑</el-button>
             <el-button size="small" type="danger">删除</el-button>
@@ -32,14 +30,14 @@
           </template>
 				</el-table-column>
 		</el-table>
-		<div class="pagination">
+		<!-- <div class="pagination">
       <el-pagination @current-change ="handleCurrentChange" layout="prev, pager, next" :total="1000">
       </el-pagination>
-		</div>
+		</div> -->
 
 
     <!-- 新增用户信息录入 -->
-    <el-dialog title="录入人员" :visible.sync="addVisible" width="30%" center>
+    <el-dialog title="录入人员" :visible.sync="addVisible" class="dialog-body" width="40%" center>
       <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="姓名" >
           <el-input v-model="form.name" class="set-width"></el-input>
@@ -79,40 +77,47 @@
 
 <script>
 export default {
+  name: 'person',
   data() {
     return {
       url: "./static/vuetable.json",
       tableData: [{
+          num : 1,
           user: "ll",
           name: "林丽",
           phone: "18819259282",
           role : "机长"
         },
         {
+          num : 1,
           user: "wm",
           name: "文敏",
           phone: "18819259282",
           role : "机长"
         },
         {
+          num : 1,
           user: "yxl",
           name: "杨秀兰",
           phone:"18819259282",
           role : "机长"
         },
         {
+          num : 1,
           user: "wq",
           name: "魏强",
           phone:"18819259282",
           role : "机长"
         },
         {
+          num : 1,
           user: "sxl",
           name: "石秀兰",
           phone:"18819259282",
           role : "机长"
         },
         {
+          num : 1,
           user: "zy",
           name: "朱洋",
           phone:"18819259282",
@@ -136,12 +141,22 @@ export default {
       }
     };
   },
-  created() {
-    this.getData();
-  },
   computed: {
-    data() {
-
+    getTabledata() {
+      let result = this.tableData;
+      //更新的是newTabledata
+      if(this.is_search&&this.select_word !== null){
+        result = this.isSearch(this.tableData,this.select_word,function(item,word){
+          if(item){
+            console.log(item)
+            console.log(word)
+            return true
+          }
+          return false
+        });
+      }
+      console.log(result);
+      return result;
     }
   },
   methods: {
@@ -149,17 +164,26 @@ export default {
       this.cur_page = val;
       this.getData();
     },
-    getData() {
-      // // 用axios从json数据中获得数据数组
-      // let self = this;
-      // console.log(self);
-      // self.$axios.get(self.url).then(res =>{
-      //   self.tableData = res.data.list;
-      //   for(let i = 0;i<self.tableData.length;i++){
-      //     self.tableData[i].num = i+1;
-      //   }
-      //   console.log(self.tableData);
-      // });
+    isSearch(tableData, filter, fn){
+      return tableData.filter(function(item,index,array){
+        console.log(index);
+        return fn(item,filter);
+      })
+    },
+    // getData() {
+    //   // // 用axios从json数据中获得数据数组
+    //   // let self = this;
+    //   // console.log(self);
+    //   // self.$axios.get(self.url).then(res =>{
+    //   //   self.tableData = res.data.list;
+    //   //   for(let i = 0;i<self.tableData.length;i++){
+    //   //     self.tableData[i].num = i+1;
+    //   //   }
+    //   //   console.log(self.tableData);
+    //   // });
+    // },
+    search(){
+      this.is_search = true;
     },
     resetForm(){
       this.form.name =null;
@@ -197,30 +221,31 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.handle-box {
-  margin-bottom: 20px
-}
 .handle-select {
-  width: 120px;
+  width: 7.5rem;
 }
 .handle-input {
-  width: 300px;
+  width: 18.75rem;
   display: inline-block;
   margin-top: .625rem;
-  margin-left: .3125rem;
+  margin-right: 1.25rem;
 }
 
 .handle-but{
   margin-top: .625rem;
-  margin-left: .3125rem;
+  margin-right: 1.25rem;
+  margin-left: 0;
 }
 
 .pagination{
-  text-align : center;
+  text-align : center
 }
 
 .set-width{
-  width:75%;
+  width:100%;
 }
 
+.dialog-body{
+  padding : 25px 35px 0px 27px;
+}
 </style>

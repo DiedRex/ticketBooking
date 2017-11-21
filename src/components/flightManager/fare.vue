@@ -238,7 +238,7 @@ export default {
 <style lang="stylus" scoped>
 .fare {
   .el-container {
-    margin-top: 2rem
+    margin-top: 1rem
   }
   .el-main {
     .el-form {
@@ -256,7 +256,7 @@ export default {
   .el-aside {
     margin-right: 1rem
     .asider-title {
-      max-height: 40rem
+      max-height: 35rem
       font-size: 2rem
       background: white
       color: #878d99
